@@ -1,3 +1,2 @@
 # ignore ALL files in ANY directory named thesis_env
 thesis_env/ 
-rawdata/
