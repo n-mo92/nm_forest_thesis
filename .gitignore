@@ -1,5 +1,5 @@
-# ignore ALL files in ANY directory named thesis_env
-thesis_env/ 
+# ignore ALL files within these directories
+#thesis_env/ 
 rawdata/
 processing/
 outputs/
