@@ -17,5 +17,3 @@ gdal_translate.exe -tr 5.0 5.0 -a_nodata 0.0 -ot Float32 -of GTiff -co COMPRESS=
 
 
 :: Note: %~dp0 refers to the main directory in which this batch script is stored
-
-pause

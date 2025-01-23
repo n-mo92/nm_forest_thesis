@@ -7,24 +7,11 @@
 setlocal enabledelayedexpansion
 
 :: Set up working folder (for inputs and ouputs)
-set "working_folder=%cd%\processed\"
+set "working_folder=%cd%\processing"
 
 :: Set up the shapefile for clipping (ie German Natura 2000)
 set "shapefile=%cd%\outputs\natura_DE.shp"
 
-:: Change directory to where gdal is stored
-cd thesis_env_conda\Library\bin
+echo Working folder : %working_folder
+echo Shapefile : %shapefile%
 
-:: Iterate through rasters in the working folder which include 5m in the file name
-for %%F in ("%working_folder%\*_5m.tif") do (
-    :: Extract the filename without extension
-    set "filename=%%~nF"
-
-    :: Set up the output filename
-    set "output_file=%working_folder%\!filename!_clipped.tif"
-
-    :: Run gdalwarp with cutline 
-    gdalwarp -cutline "%shapefile%" "%%F" "!output_file!"
-)
-
-pause

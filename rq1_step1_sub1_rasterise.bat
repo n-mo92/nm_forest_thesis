@@ -14,5 +14,3 @@ gdal_rasterize.exe -l U2018_CLC2018_V2020_20u1 -a Code_18 -tr 5.0 5.0 -a_nodata 
 
 
 :: Note: %~dp0 refers to the main directory in which this batch script is stored
-
-pause
