@@ -30,7 +30,6 @@ for %%F in ("%working_folder%\*_5m.vrt") do (
     ::gdaladdo.exe -r nearest -ro !output_file!
 )
 
-:: -co COMPRESS=LZW -co BIGTIFF=YES
 
 
 
