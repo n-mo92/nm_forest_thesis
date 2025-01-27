@@ -1,4 +1,4 @@
-:: WINDOWS BATCH FILE - UPSAMPLE
+:: WINDOWS BATCH FILE - CLIP
 
 :: When echo is turned off, the command prompt doesn't appear in the output
 @echo off
@@ -16,14 +16,21 @@ set "shapefile=%cd%\outputs\natura_DE.shp"
 cd thesis_env_conda\Library\bin
 
 :: Iterate through rasters in the working folder which include 5m in the file name
-for %%F in ("%working_folder%\*_5m.tif") do (
+for %%F in ("%working_folder%\*_5m.vrt") do (
     :: Extract the filename without extension
     set "filename=%%~nF"
 
     :: Set up the output filename
-    set "output_file=%working_folder%\!filename!_clipped.vrt"
+    set "output_file=%working_folder%\!filename!_clipped.tif"
 
     :: Run gdalwarp with cutline 
-    gdalwarp -crop_to_cutline -cutline "%shapefile%" "%%F" "!output_file!"
+    gdalwarp.exe -crop_to_cutline -cutline %shapefile% -dstnodata 0.0 -ot UInt16 -co COMPRESS=LZW -co BIGTIFF=YES %%F !output_file!
+
+    :: Run gdaladdo to generate internal overviews (so that the data can be opened in QGIS)
+    ::gdaladdo.exe -r nearest -ro !output_file!
 )
+
+:: -co COMPRESS=LZW -co BIGTIFF=YES
+
+
 
