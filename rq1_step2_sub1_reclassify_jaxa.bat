@@ -4,8 +4,8 @@
 @echo off
 
 :: Set up input & output files
-set "input_file=%cd%\processing\jaxa_FNF_3035_DE_clipped.tif"
-set "ouput_file=%cd%\outputs\jaxa_FNF_3035_DE_finalFNF.tif"
+set "input_file=%cd%\processing\jaxa_FNF_3035_DE.tif"
+set "ouput_file=%cd%\processing\jaxa_FNF_3035_DE_reclass.tif"
 
 :: Change directory to where gdal is stored
 cd thesis_env_conda\Library\bin
