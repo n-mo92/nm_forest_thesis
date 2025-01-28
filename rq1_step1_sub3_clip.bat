@@ -9,11 +9,14 @@ setlocal enabledelayedexpansion
 :: Set up working folder (for inputs and ouputs)
 set "working_folder=%cd%\processing"
 
-:: Set up the shapefile for clipping (ie German Natura 2000)
-set "shapefile=%cd%\outputs\natura_DE.shp"
-
 :: Change directory to where gdal is stored
 cd thesis_env_conda\Library\bin
+
+:: Create shapefile for clipping - based on CORINE footprint 
+::gdal_footprint.exe -overwrite -max_points unlimited %working_folder%\U2018_CLC2018_V2020_3035_DE_5m.tif %working_folder%\clipper.shp
+
+:: Set up the new shapefile for clipping
+set "shapefile=%working_folder%\clipper.shp"
 
 :: Iterate through rasters in the working folder which include 5m in the file name
 for %%F in ("%working_folder%\*_5m.vrt") do (
@@ -24,12 +27,8 @@ for %%F in ("%working_folder%\*_5m.vrt") do (
     set "output_file=%working_folder%\!filename!_clipped.tif"
 
     :: Run gdalwarp with cutline 
-    gdalwarp.exe -crop_to_cutline -cutline %shapefile% -dstnodata 0.0 -ot UInt16 -co COMPRESS=LZW -co BIGTIFF=YES %%F !output_file!
+    gdalwarp.exe -crop_to_cutline -cutline %shapefile% -dstnodata none -ot UInt16 -co COMPRESS=LZW -co BIGTIFF=YES %%F !output_file!
 
-    :: Run gdaladdo to generate internal overviews (so that the data can be opened in QGIS)
+    :: Run gdaladdo to generate overviews (so that the data can be opened faster in QGIS)
     ::gdaladdo.exe -r nearest -ro !output_file!
 )
-
-
-
-
