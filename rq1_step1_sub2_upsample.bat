@@ -10,10 +10,10 @@ set "working_folder=%cd%\processing"
 cd thesis_env_conda\Library\bin
 
 :: Upsample ESA layer (300m) to 5m without interpolation
-gdal_translate.exe -tr 5.0 5.0 -a_nodata 0.0 -ot UInt16 %working_folder%\esa_lccs_class_3035_DE.tif %working_folder%\esa_lccs_class_3035_DE_5m.vrt
+gdal_translate.exe -tr 5.0 5.0 -a_nodata 0.0 -ot UInt16 -co COMPRESS=LZW -co BIGTIFF=YES %working_folder%\esa_lccs_class_3035_DE.tif %working_folder%\esa_lccs_class_3035_DE_5m.tif
 
 :: Upsample JAXA layer (25m) to 5m without interpolation
-gdal_translate.exe -tr 5.0 5.0 -a_nodata 0.0 -ot UInt16 %working_folder%\jaxa_FNF_3035_DE.tif %working_folder%\jaxa_FNF_3035_DE_5m.vrt
+gdal_translate.exe -tr 5.0 5.0 -a_nodata 0.0 -ot UInt16 -co COMPRESS=LZW -co BIGTIFF=YES %working_folder%\jaxa_FNF_3035_DE.tif %working_folder%\jaxa_FNF_3035_DE_5m.tif
 
 
 :: ADD HANSEN LATER
