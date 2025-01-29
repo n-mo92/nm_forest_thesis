@@ -19,19 +19,19 @@ cd thesis_env_conda\Library\bin
 set "shapefile=%working_folder%\clipper.shp"
 
 :: Iterate through rasters in the working folder which include 5m in the file name
-for %%F in ("%working_folder%\*_5m.vrt") do (
+for %%F in ("%working_folder%\*_5m.tif") do (
     :: Extract the filename without extension
     set "filename=%%~nF"
 
     :: Set up the output filename
-    set "output_file=%working_folder%\!filename!_clipped.vrt"
+    set "output_file=%working_folder%\!filename!_clipped.tif"
 
     :: Run gdalwarp with cutline 
-    gdalwarp.exe -crop_to_cutline -cutline %shapefile% -dstnodata 0.0 -ot UInt16 -overwrite %%F !output_file!
+    gdalwarp.exe -crop_to_cutline -cutline %shapefile% -dstnodata 0.0 -ot UInt16 -overwrite -co COMPRESS=LZW -co BIGTIFF=YES %%F !output_file!
 
     :: Run gdaladdo to generate overviews (so that the data can be opened faster in QGIS)
-    gdaladdo.exe -r nearest -ro !output_file!
+    ::gdaladdo.exe -r nearest -ro !output_file!
 )
 
 
-:: -co COMPRESS=LZW -co BIGTIFF=YES
+:: 
