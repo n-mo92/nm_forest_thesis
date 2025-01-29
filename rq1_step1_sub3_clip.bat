@@ -18,8 +18,8 @@ cd thesis_env_conda\Library\bin
 :: Set up the new shapefile for clipping
 set "shapefile=%working_folder%\clipper.shp"
 
-:: Iterate through rasters in the working folder which include 5m in the file name
-for %%F in ("%working_folder%\*_5m.tif") do (
+:: Iterate through rasters in the working folder which include "_reclass" in the file name
+for %%F in ("%working_folder%\*_reclass.tif") do (
     :: Extract the filename without extension
     set "filename=%%~nF"
 
