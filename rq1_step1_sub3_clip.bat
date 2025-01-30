@@ -31,7 +31,4 @@ for %%F in ("%working_folder%\*_reclass.tif") do (
 
     :: Run gdaladdo to generate overviews (so that the data can be opened faster in QGIS)
     ::gdaladdo.exe -r nearest -ro !output_file!
-)
-
-
-:: 
+) 
