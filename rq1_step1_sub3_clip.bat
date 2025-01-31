@@ -27,7 +27,7 @@ for %%F in ("%working_folder%\*_reclass.tif") do (
     set "output_file=%working_folder%\!filename!_clipped.tif"
 
     :: Run gdalwarp with cutline 
-    gdalwarp.exe -crop_to_cutline -cutline %shapefile% -dstnodata -9999 -ot UInt16 -co COMPRESS=LZW -co BIGTIFF=YES %%F !output_file!
+    gdalwarp.exe -crop_to_cutline -cutline %shapefile% -dstnodata -9999 -ot Int16 -co COMPRESS=LZW -co BIGTIFF=YES %%F !output_file!
 
     :: Run gdaladdo to generate overviews (so that the data can be opened faster in QGIS)
     ::gdaladdo.exe -r nearest -ro !output_file!
