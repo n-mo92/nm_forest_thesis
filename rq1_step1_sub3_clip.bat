@@ -18,7 +18,7 @@ cd thesis_env_conda\Library\bin
 :: Set up the new shapefile for clipping
 set "shapefile=%working_folder%\clipper.shp"
 
-:: Iterate through rasters in the working folder which include "_reclass" in the file name
+:: Iterate through rasters in the working folder which include "_warp_exts" in the file name
 for %%F in ("%working_folder%\*_warp_exts.tif") do (
     :: Extract the filename without extension
     set "filename=%%~nF"
