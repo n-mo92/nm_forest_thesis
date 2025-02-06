@@ -40,7 +40,7 @@ dependencies:
   - brotli-python=1.1.0=py312h275cf98_2
   - bzip2=1.0.8=h2466b09_7
   - c-ares=1.34.4=h2466b09_0
-  - ca-certificates=2024.12.14=h56e8100_0
+  - ca-certificates=2025.1.31=h56e8100_0
   - cached-property=1.5.2=hd8ed1ab_1
   - cached_property=1.5.2=pyha770c72_1
   - certifi=2024.12.14=pyhd8ed1ab_0
@@ -67,6 +67,7 @@ dependencies:
   - exceptiongroup=1.2.2=pyhd8ed1ab_1
   - executing=2.1.0=pyhd8ed1ab_1
   - expat=2.6.4=he0c23c2_0
+  - fiona=1.10.1=py312h6e88f47_3
   - folium=0.19.4=pyhd8ed1ab_0
   - fonttools=4.55.4=py312h31fea79_0
   - fqdn=1.5.1=pyhd8ed1ab_1
@@ -236,6 +237,7 @@ dependencies:
   - pyzmq=26.2.0=py312hd7027bb_3
   - qhull=2020.2=hc790b64_5
   - rasterio=1.4.3=py312hc0daee4_0
+  - rasterstats=0.20.0=pyhd8ed1ab_1
   - rav1e=0.6.6=h975169c_2
   - re2=2024.07.02=haf4117d_2
   - referencing=0.36.1=pyhd8ed1ab_0
@@ -249,6 +251,7 @@ dependencies:
   - send2trash=1.8.3=pyh5737063_1
   - setuptools=75.8.0=pyhff2d567_0
   - shapely=2.0.6=py312h0c580ee_2
+  - simplejson=3.19.3=py312h4389bb4_1
   - six=1.17.0=pyhd8ed1ab_0
   - snappy=1.2.1=h500f7fa_1
   - sniffio=1.3.1=pyhd8ed1ab_1
