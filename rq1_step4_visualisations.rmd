@@ -1,0 +1,44 @@
+---
+title: 'RQ1 Forest Definition Visualisations'
+author: "Nina Moffat"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    theme: flatly
+    toc: yes
+    toc_float:
+      collapsed: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Information about visualisations
+
+In this R Markdown script, I create *some* of the visualisations which I plan to include in my thesis. 
+For now (for ease and time efficiency) I decided to take the following general strategy with making the visualisations:
+- Tables are made directly in word
+- Figures like bar charts and plots are made in R (HERE)
+- Maps are made in QGIS
+
+If I have time later, I would like to come back to do more visualisations programmatically, but I'll have to see how I get on :)
+
+While I have been using Visual Studio Code for all Python scripts so far, I have used R Studio to create this R Markdown file and simply push my changes in this file (which is contained within the same folder as my other code) to GitHub using the git management features in Visual Studio Code.
+
+```{r install}
+
+# Install pacman for package management
+library(pacman)
+
+# Install/load required packages
+p_load(tidyverse, 
+       install = TRUE)
+
+```
+
+
+## FNF Visualisations
+
+- Create a bar chart of total forest per FNF map with dashed line for mean
