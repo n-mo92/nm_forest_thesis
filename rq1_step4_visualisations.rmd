@@ -34,6 +34,7 @@ library(pacman)
 
 # Install/load required packages
 p_load(tidyverse, 
+       scales,
        install = TRUE)
 
 ```
@@ -42,3 +43,102 @@ p_load(tidyverse,
 ## FNF Visualisations
 
 - Create a bar chart of total forest per FNF map with dashed line for mean
+
+```{r fnf_prep}
+
+# Adjust how many digits to display
+options(digits=9)
+
+# Read in CSV with adjusted column names
+fnf_all <- read_csv("outputs/all_fnf_natura_stats.csv", 
+                    col_names = c("index", 
+                                  "fnf_map", 
+                                  "total_forest_ha",
+                                  "total_forest_per",
+                                  "diff_mean_ha",
+                                  "diff_mean_per"
+                                  ),
+                    show_col_types = FALSE
+                    )
+
+# Tidy-up: remove the first column (index) and first row (old column names)
+fnf_all <- fnf_all[2:7,2:6]
+
+# Convert columns to numeric
+fnf_all$total_forest_ha <- as.numeric(fnf_all$total_forest_ha)
+fnf_all$total_forest_per <- as.numeric(fnf_all$total_forest_per)
+fnf_all$diff_mean_ha <- as.numeric(fnf_all$diff_mean_ha)
+fnf_all$diff_mean_per <- as.numeric(fnf_all$diff_mean_per)
+
+# Calculate the mean amount of forest (ha) across all FNF maps
+fnf_mean_ha <- mean(as.numeric(fnf_all$total_forest_ha))
+
+```
+
+
+Helpful material for ggplot styling:
+https://ggplot2.tidyverse.org/articles/faq-axes.html 
+https://ggplot2-book.org/themes#sec-themes
+
+
+
+
+```{r fnf_bar}
+
+# Define the order I want the bars in
+fnf_order = c("Hansen Tree Cover", "ESA Land Cover", "JAXA Forest/Non-Forest",
+              "CORINE Land Use", "Germany Land Use", "FAO-Forest Approximation")
+
+# Create a bar chart of the total forest, with the mean as dashed-line
+ggplot(data=fnf_all, aes(x=factor(fnf_map, fnf_order), y=total_forest_ha/1000000)) +
+  geom_bar(stat="identity", 
+           colour="darkgreen", 
+           fill="darkgreen",
+           width=0.4
+           )+
+  labs(x="\nForest Definition Operationalisation", 
+       y="Total Forest in German Natura 2000 Areas \n(millions ha)\n"
+       ) +
+  coord_cartesian(ylim=c(3.0, 4.5)) +
+  scale_y_continuous(labels = label_number(accuracy = 0.01),
+                     breaks = c(3.0, 3.25, 3.5, 3.75, 4.0, 4.25, 4.5),
+                     ) +
+  geom_hline(yintercept = fnf_mean_ha/1000000, 
+             colour = "darkgrey", 
+             linetype = 'dashed'
+             ) +
+  annotate("text", x=1, y=3.98, 
+           label="Mean Forest Area", 
+           colour="darkgrey",
+           size = 4,
+           hjust = 0,
+           family = "serif"
+           ) +
+  theme(panel.grid.major.x = element_blank(),
+        panel.background = element_blank(),
+        axis.line = element_line(colour = "black"),
+        axis.text = element_text(size=10),
+        axis.title.y = element_text(size=11),
+        text = element_text(family="serif")
+        )
+
+```
+**NOTE**
+Some things may look off in the rmd version of the figure - it will look a bit different in the saved png!
+
+
+```{r fnf_save}
+
+# Once happy with the outputs, save them!
+ggsave("outputs/figures/fnf_all_bar_chart.png",
+       width=10,
+       height=5
+       )
+
+```
+
+
+## Forest Consensus Visualisations
+
+- Create a bar chart of total area in each class (see pic in "writing folder")
+- Create pie chart of percentage of each class (see pic in "writing folder")
