@@ -73,6 +73,15 @@ fnf_all$diff_mean_per <- as.numeric(fnf_all$diff_mean_per)
 # Calculate the mean amount of forest (ha) across all FNF maps
 fnf_mean_ha <- mean(as.numeric(fnf_all$total_forest_ha))
 
+# Change names of FNF maps to be more space efficient
+fnf_all <- fnf_all %>% 
+  mutate(fnf_map = str_replace(fnf_map, "Hansen Tree Cover", "Hansen/IGBP")) %>%
+  mutate(fnf_map = str_replace(fnf_map, "ESA Land Cover", "ESA")) %>%
+  mutate(fnf_map = str_replace(fnf_map, "JAXA Forest/Non-Forest", "JAXA")) %>%
+  mutate(fnf_map = str_replace(fnf_map, "CORINE Land Use", "CORINE")) %>%
+  mutate(fnf_map = str_replace(fnf_map, "Germany Land Use", "CORINE + LBM-DE")) %>%
+  mutate(fnf_map = str_replace(fnf_map, "FAO-Forest Approximation", "FAO")) 
+
 ```
 
 
@@ -86,8 +95,8 @@ https://ggplot2-book.org/themes#sec-themes
 ```{r fnf_bar}
 
 # Define the order I want the bars in
-fnf_order = c("Hansen Tree Cover", "ESA Land Cover", "JAXA Forest/Non-Forest",
-              "CORINE Land Use", "Germany Land Use", "FAO-Forest Approximation")
+fnf_order = c("Hansen/IGBP", "ESA", "JAXA",
+              "CORINE", "CORINE + LBM-DE", "FAO")
 
 # Create a bar chart of the total forest, with the mean as dashed-line
 ggplot(data=fnf_all, aes(x=factor(fnf_map, fnf_order), y=total_forest_ha/1000000)) +
@@ -117,8 +126,8 @@ ggplot(data=fnf_all, aes(x=factor(fnf_map, fnf_order), y=total_forest_ha/1000000
   theme(panel.grid.major.x = element_blank(),
         panel.background = element_blank(),
         axis.line = element_line(colour = "black"),
-        axis.text = element_text(size=10),
-        axis.title.y = element_text(size=11),
+        axis.text = element_text(size=12),
+        axis.title = element_text(size=13),
         text = element_text(family="serif")
         )
 
@@ -142,3 +151,97 @@ ggsave("outputs/figures/fnf_all_bar_chart.png",
 
 - Create a bar chart of total area in each class (see pic in "writing folder")
 - Create pie chart of percentage of each class (see pic in "writing folder")
+
+I probably don't need both for the final thesis, but just thought I'd make them both to have some options.
+
+```{r con_prep}
+
+# Adjust how many digits to display
+options(digits=9)
+
+# Read in CSV with adjusted column names
+consensus_all <- read_csv("outputs/all_consensus_natura_stats.csv", 
+                          col_names = c("index", 
+                                        "class", 
+                                        "total_area_ha",
+                                        "coverage_per"
+                                        ),
+                          show_col_types = FALSE
+                          )
+
+# Tidy-up: remove the first two columns (index) and first row (old column names)
+consensus_all <- consensus_all[2:8,2:4]
+
+# Add new class information (just want to visualise it differently)
+consensus_all$forest_nonforest = c("Non-Forest", "Non-Forest", "Non-Forest",
+                                   "Undetermined", "Forest", "Forest", "Forest")
+consensus_all$consensus = c("Full Consensus", "High Consensus", "Low Consensus", 
+                            "No Consensus", 
+                            "Low Consensus", "High Consensus", "Full Consensus")
+
+
+# Convert columns to numeric
+consensus_all$total_area_ha <- as.numeric(consensus_all$total_area_ha)
+consensus_all$coverage_per <- as.numeric(consensus_all$coverage_per)
+
+
+```
+
+
+
+```{r con_bar}
+
+# Create the bar chart for the consensus map results
+ggplot(data=consensus_all, aes(x = interaction(consensus, class), 
+                               y = total_area_ha/1000000,
+                               fill = class)) +
+  geom_bar(stat="identity",
+           colour="black",
+           width=0.5) +
+  scale_fill_manual(values=c("white", "#5985de", "#9ce6f1", "#f1ab4a",
+                             "#eff171", "#8acc62", "#1a9641")) +
+  coord_cartesian(xlim = c(0.5, 7.5), ylim = c(0, 3),  expand=FALSE, clip="off") +
+  scale_y_continuous(labels = label_number(accuracy = 0.1),
+                     breaks = c(0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0),
+                     ) +
+  labs(y="Total Area within Germany Natura 2000 Areas \n(millions ha)\n") +
+  annotate(geom = "text", 
+           x = seq_len(nrow(consensus_all)), 
+           y = -0.1, 
+           label = consensus_all$consensus, 
+           size = 3,
+           family = "serif") +
+  annotate(geom = "text", 
+           x = c(2, 4, 6), 
+           y = -0.3, 
+           label = unique(consensus_all$forest_nonforest), 
+           size = 4,
+           family = "serif") +
+  theme(plot.margin = unit(c(1, 1, 3, 1), "lines"),
+        panel.grid.major.x = element_blank(),
+        panel.background = element_blank(),
+        axis.line = element_line(colour = "black"),
+        axis.title.x = element_blank(),
+        axis.text.x = element_blank(),
+        text = element_text(family="serif"),
+        legend.position = "none"
+        )
+
+```
+
+```{r con_bar_save}
+
+# Once happy with the outputs, save them!
+ggsave("outputs/figures/consensus_bar_chart.png",
+       width=7,
+       height=5
+       )
+
+```
+
+
+```{r con_pie}
+
+```
+
+
