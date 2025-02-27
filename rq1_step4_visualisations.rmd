@@ -268,4 +268,9 @@ oldcolours <- c("white", "#5985de", "#9ce6f1", "#f1ab4a",
 ```
 
 
+ Tree map?
+https://www.data-to-viz.com/graph/treemap.html
+https://r-graph-gallery.com/treemap.html
+
+
 
