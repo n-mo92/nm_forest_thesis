@@ -101,8 +101,8 @@ fnf_order = c("Hansen/IGBP", "ESA", "JAXA",
 # Create a bar chart of the total forest, with the mean as dashed-line
 ggplot(data=fnf_all, aes(x=factor(fnf_map, fnf_order), y=total_forest_ha/1000000)) +
   geom_bar(stat="identity", 
-           colour="darkgreen", 
-           fill="darkgreen",
+           colour="black", 
+           fill="#0F5726",
            width=0.4
            )+
   labs(x="\nForest Definition Operationalisation", 
@@ -113,12 +113,12 @@ ggplot(data=fnf_all, aes(x=factor(fnf_map, fnf_order), y=total_forest_ha/1000000
                      breaks = c(3.0, 3.25, 3.5, 3.75, 4.0, 4.25, 4.5),
                      ) +
   geom_hline(yintercept = fnf_mean_ha/1000000, 
-             colour = "darkgrey", 
+             colour = "#676767", 
              linetype = 'dashed'
              ) +
   annotate("text", x=1, y=3.98, 
            label="Mean Forest Area", 
-           colour="darkgrey",
+           colour="#676767",
            size = 4,
            hjust = 0,
            family = "serif"
@@ -138,9 +138,10 @@ Some things may look off in the rmd version of the figure - it will look a bit d
 
 ```{r fnf_save}
 
-# Once happy with the outputs, save them!
+# Once happy with the outputs, save them! 
+# Note this will output whatever plot was run last!
 ggsave("outputs/figures/fnf_all_bar_chart.png",
-       width=10,
+       width=9,
        height=5
        )
 
@@ -150,9 +151,7 @@ ggsave("outputs/figures/fnf_all_bar_chart.png",
 ## Forest Consensus Visualisations
 
 - Create a bar chart of total area in each class (see pic in "writing folder")
-- Create pie chart of percentage of each class (see pic in "writing folder")
 
-I probably don't need both for the final thesis, but just thought I'd make them both to have some options.
 
 ```{r con_prep}
 
@@ -174,10 +173,9 @@ consensus_all <- consensus_all[2:8,2:4]
 
 # Add new class information (just want to visualise it differently)
 consensus_all$forest_nonforest = c("Non-Forest", "Non-Forest", "Non-Forest",
-                                   "Undetermined", "Forest", "Forest", "Forest")
-consensus_all$consensus = c("Full Consensus", "High Consensus", "Low Consensus", 
-                            "No Consensus", 
-                            "Low Consensus", "High Consensus", "Full Consensus")
+                                   "Uncertain", "Forest", "Forest", "Forest")
+consensus_all$consensus = c("Full", "High", "Low", "None", 
+                            "Low", "High", "Full")
 
 
 # Convert columns to numeric
@@ -187,6 +185,8 @@ consensus_all$coverage_per <- as.numeric(consensus_all$coverage_per)
 
 ```
 
+
+Note the colours here are selected to be used for the consensus map as well. I used a colour-blind safe palette (https://color.adobe.com/create/color-accessibility) with aim to highlight non-consensus areas compared to consensus forest. 
 
 
 ```{r con_bar}
@@ -198,25 +198,39 @@ ggplot(data=consensus_all, aes(x = interaction(consensus, class),
   geom_bar(stat="identity",
            colour="black",
            width=0.5) +
-  scale_fill_manual(values=c("white", "#5985de", "#9ce6f1", "#f1ab4a",
-                             "#eff171", "#8acc62", "#1a9641")) +
-  coord_cartesian(xlim = c(0.5, 7.5), ylim = c(0, 3),  expand=FALSE, clip="off") +
+  scale_fill_manual(values=c("#FFFFFF", "#DCDCDC", "#B4B6BB", "#F1AB4A",
+                             "#EFF171", "#ABE071", "#0F5726")) +
+  coord_cartesian(xlim = c(0.5, 7.5), ylim = c(0, 3.5),  expand=FALSE, clip="off") +
   scale_y_continuous(labels = label_number(accuracy = 0.1),
-                     breaks = c(0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0),
+                     breaks = c(0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5),
                      ) +
   labs(y="Total Area within Germany Natura 2000 Areas \n(millions ha)\n") +
   annotate(geom = "text", 
            x = seq_len(nrow(consensus_all)), 
            y = -0.1, 
            label = consensus_all$consensus, 
-           size = 3,
+           size = 4,
            family = "serif") +
   annotate(geom = "text", 
            x = c(2, 4, 6), 
-           y = -0.3, 
+           y = 3.25, 
            label = unique(consensus_all$forest_nonforest), 
            size = 4,
            family = "serif") +
+    annotate(geom = "text", 
+           x = 4, 
+           y = -0.3, 
+           label = "\nDegree of Consensus", 
+           size = 4.5,
+           family = "serif") +
+  geom_vline(xintercept = 3.5, 
+             colour = "#676767", 
+             linetype = 'dashed'
+             ) +
+    geom_vline(xintercept = 4.5, 
+             colour = "#676767", 
+             linetype = 'dashed'
+             ) +
   theme(plot.margin = unit(c(1, 1, 3, 1), "lines"),
         panel.grid.major.x = element_blank(),
         panel.background = element_blank(),
@@ -224,24 +238,34 @@ ggplot(data=consensus_all, aes(x = interaction(consensus, class),
         axis.title.x = element_blank(),
         axis.text.x = element_blank(),
         text = element_text(family="serif"),
-        legend.position = "none"
+        legend.position = "none",
+        axis.text = element_text(size=12),
+        axis.title = element_text(size=13)
         )
 
 ```
 
+
+
 ```{r con_bar_save}
 
 # Once happy with the outputs, save them!
+# Note this will output whatever plot was run last!
 ggsave("outputs/figures/consensus_bar_chart.png",
        width=7,
-       height=5
+       height=4
        )
 
 ```
 
 
-```{r con_pie}
 
+```{r temp}
+
+# Just (temporarily) saving my old colour scheme so I have them somewhere
+oldcolours <- c("white", "#5985de", "#9ce6f1", "#f1ab4a",
+                             "#eff171", "#8acc62", "#1a9641")
 ```
+
 
 
