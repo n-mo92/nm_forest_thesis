@@ -35,6 +35,7 @@ library(pacman)
 # Install/load required packages
 p_load(tidyverse, 
        scales,
+       treemap,
        install = TRUE)
 
 ```
@@ -268,9 +269,29 @@ oldcolours <- c("white", "#5985de", "#9ce6f1", "#f1ab4a",
 ```
 
 
- Tree map?
+ Ross also suggested creating a tree map with the consensus map data. 
+ 
 https://www.data-to-viz.com/graph/treemap.html
 https://r-graph-gallery.com/treemap.html
 
 
+```{r con_treemap}
+
+# Add grouping variable name
+consensus_all$treemap_group = c("Non-Forest: Full Consensus", "Non-Forest: High Consensus",
+                                "Non-Forest: Low Consensus", "Uncertain: No Consensus", 
+                                "Forest: Low Consensus", "Forest: High Consensus", 
+                                "Forest: Full Consensus")
+
+# Plot tree map
+treemap(consensus_all,
+        index= "treemap_group",
+        vSize="total_area_ha",
+        type="index",
+        title = "",
+        palette = c("#0F5726", "#ABE071", "#EFF171", "#FFFFFF", "#DCDCDC", "#B4B6BB",
+                    "#F1AB4A")
+        )
+
+```
 
