@@ -295,13 +295,13 @@ treemap(consensus_all,
 
 ```
 
-```{r con_treemap_cl3}
+```{r con_treemap_class1}
 
 # Adjust how many digits to display
 options(digits=9)
 
 # Read in CSV with adjusted column names
-class3_fnf_combo <- read_csv("outputs/treemap_class3_fnfcombo_natura_stats.csv", 
+class1_fnf_combo <- read_csv("outputs/treemap_class1_fnfcombo_natura_stats.csv", 
                              col_names = c("index", 
                                            "fnf_combo", 
                                            "forest_pixels",
@@ -311,21 +311,53 @@ class3_fnf_combo <- read_csv("outputs/treemap_class3_fnfcombo_natura_stats.csv",
                              )
 
 # Tidy-up: remove the first column (index) and first row (old column names)
-class3_fnf_combo <- class3_fnf_combo[2:16,2:4]
+class1_fnf_combo <- class1_fnf_combo[2:7,2:4]
 
 # Convert columns to numeric
-class3_fnf_combo$forest_pixels <- as.numeric(class3_fnf_combo$forest_pixels)
-class3_fnf_combo$forest_area_ha <- as.numeric(class3_fnf_combo$forest_area_ha)
+class1_fnf_combo$forest_pixels <- as.numeric(class1_fnf_combo$forest_pixels)
+class1_fnf_combo$forest_area_ha <- as.numeric(class1_fnf_combo$forest_area_ha)
 
 # Plot tree map
-treemap(class3_fnf_combo,
+treemap(class1_fnf_combo,
         index= "fnf_combo",
         vSize="forest_area_ha",
         type="index",
-        title = "Class 3 (No Consensus) Breakdown",
+        title = "Class 1 Breakdown: Which maps indicate forest presence, when all others indicate absence?",
+        fontsize.title = 11
         )
-
-
 
 ```
 
+
+```{r con_treemap_class2}
+
+# Adjust how many digits to display
+options(digits=9)
+
+# Read in CSV with adjusted column names
+class2_fnf_combo <- read_csv("outputs/treemap_class2_fnfcombo_natura_stats.csv", 
+                             col_names = c("index", 
+                                           "fnf_combo", 
+                                           "forest_pixels",
+                                           "forest_area_ha"
+                                           ),
+                             show_col_types = FALSE
+                             )
+
+# Tidy-up: remove the first column (index) and first row (old column names)
+class2_fnf_combo <- class1_fnf_combo[2:16,2:4]
+
+# Convert columns to numeric
+class2_fnf_combo$forest_pixels <- as.numeric(class2_fnf_combo$forest_pixels)
+class2_fnf_combo$forest_area_ha <- as.numeric(class2_fnf_combo$forest_area_ha)
+
+# Plot tree map
+treemap(class2_fnf_combo,
+        index= "fnf_combo",
+        vSize="forest_area_ha",
+        type="index",
+        title = "Class 2 Breakdown: Which 2 maps indicate forest presence, when 4 others indicate absence?",
+        fontsize.title = 11
+        )
+
+```
