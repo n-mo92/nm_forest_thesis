@@ -317,9 +317,18 @@ class1_fnf_combo <- class1_fnf_combo[2:7,2:4]
 class1_fnf_combo$forest_pixels <- as.numeric(class1_fnf_combo$forest_pixels)
 class1_fnf_combo$forest_area_ha <- as.numeric(class1_fnf_combo$forest_area_ha)
 
+# Add prettier name labels 
+class1_fnf_combo$fnf_combo_pretty = c("FAO",
+                                      "CORINE + LBM-DE",
+                                      "CORINE",
+                                      "Hansen/IGBP",
+                                      "JAXA",
+                                      "ESA"
+                                      ) 
+
 # Plot tree map
 treemap(class1_fnf_combo,
-        index= "fnf_combo",
+        index= "fnf_combo_pretty",
         vSize="forest_area_ha",
         type="index",
         title = "Class 1 Breakdown: Which maps indicate forest presence, when all others indicate absence?",
@@ -330,6 +339,33 @@ treemap(class1_fnf_combo,
 
 
 The ESA map is most likely to estimate forest presence in areas where the other maps estimate non-forest.
+
+
+```{r con_treemap_class1_alt}
+
+# CREATE ALTERNATE VERSION WHICH FOCUSES ON CONSENSUS RATHER THAN FOREST PRESENCE
+
+# Add labels for alternative display
+class1_fnf_combo$fnf_combo_alt = c("Hansen/IGBP, ESA, JAXA, CORINE, CORINE+LBM-DE",
+                                   "Hansen/IGBP, ESA, JAXA, CORINE, FAO",
+                                   "Hansen/IGBP, ESA, JAXA, CORINE+LBM-DE, FAO",
+                                   "ESA, JAXA, CORINE, CORINE+LBM-DE, FAO",
+                                   "Hansen/IGBP, ESA, CORINE, CORINE+LBM-DE, FAO",
+                                   "Hansen/IGBP, JAXA, CORINE, CORINE+LBM-DE, FAO"
+                                   ) 
+  
+
+# Plot tree map
+treemap(class1_fnf_combo,
+        index= c("fnf_combo_alt", "fnf_combo_pretty"),
+        vSize="forest_area_ha",
+        type="index",
+        title = "Class 1 Breakdown: Which 5 maps agreee on non-forest (while 1 other indicate forest)?",
+        fontsize.title = 11,
+        align.labels = list(c("center", "center"), c("right", "bottom"))
+        )
+
+```
 
 
 ```{r con_treemap_class2}
@@ -354,13 +390,67 @@ class2_fnf_combo <- class2_fnf_combo[2:16,2:4]
 class2_fnf_combo$forest_pixels <- as.numeric(class2_fnf_combo$forest_pixels)
 class2_fnf_combo$forest_area_ha <- as.numeric(class2_fnf_combo$forest_area_ha)
 
+# Add prettier name labels 
+class2_fnf_combo$fnf_combo_pretty = c("CORINE, FAO",
+                                      "CORINE, CORINE+LBM-DE",
+                                      "CORINE, Hansen/IGBP",
+                                      "ESA, CORINE",
+                                      "ESA, FAO",
+                                      "ESA, CORINE+LBM-DE",
+                                      "ESA, Hansen/IGBP",
+                                      "ESA, JAXA",
+                                      "CORINE+LBM-DE, FAO",
+                                      "CORINE+LBM-DE, Hansen/IGBP",
+                                      "Hansen/IGBP, FAO",
+                                      "JAXA, CORINE",
+                                      "JAXA, FAO",
+                                      "JAXA, CORINE+LBM-DE",
+                                      "JAXA, Hansen/IGBP"
+                                      ) 
+
 # Plot tree map
 treemap(class2_fnf_combo,
-        index= "fnf_combo",
+        index= "fnf_combo_pretty",
         vSize="forest_area_ha",
         type="index",
         title = "Class 2 Breakdown: Which 2 maps indicate forest presence, when 4 others indicate absence?",
         fontsize.title = 11
+        )
+
+```
+
+
+```{r con_treemap_class2_alt}
+
+# CREATE ALTERNATE VERSION WHICH FOCUSES ON CONSENSUS RATHER THAN FOREST PRESENCE
+
+# Add labels for alternative display
+class2_fnf_combo$fnf_combo_alt = c("Hansen/IGBP, ESA, JAXA, CORINE+LBM-DE",
+                                   "Hansen/IGBP, ESA, JAXA, FAO",
+                                   "ESA, JAXA, CORINE+LBM-DE, FAO",
+                                   "Hansen/IGBP, JAXA, CORINE+LBM-DE, FAO",
+                                   "Hansen/IGBP, JAXA, CORINE, CORINE+LBM-DE",
+                                   "Hansen/IGBP, JAXA, CORINE, FAO",
+                                   "JAXA, CORINE, CORINE+LBM-DE, FAO",
+                                   "Hansen/IGBP, CORINE, CORINE+LBM-DE, FAO",
+                                   "Hansen/IGBP, ESA, JAXA, CORINE",
+                                   "ESA, JAXA, CORINE, FAO",
+                                   "ESA, JAXA, CORINE, CORINE+LBM-DE",
+                                   "Hansen/IGBP, ESA, CORINE+LBM-DE, FAO",
+                                   "Hansen/IGBP, ESA, CORINE, CORINE+LBM-DE",
+                                   "Hansen/IGBP, ESA, CORINE, FAO",
+                                   "ESA, CORINE, CORINE + LBM-DE, FAO"
+                                   ) 
+
+# Plot tree map
+treemap(class2_fnf_combo,
+        index= c("fnf_combo_alt", "fnf_combo_pretty"),
+        vSize="forest_area_ha",
+        type="index",
+        title = "Class 2 Breakdown: Which 4 maps agreee on non-forest (while 2 others indicate forest)?",
+        fontsize.labels = 8,
+        fontsize.title = 11,
+        align.labels = list(c("center", "center"), c("right", "bottom"))
         )
 
 ```
@@ -393,7 +483,7 @@ treemap(class3_fnf_combo,
         index= "fnf_combo",
         vSize="forest_area_ha",
         type="index",
-        title = "Class 3 Breakdown: Which 3 maps indicate forest presence, when 3 others indicate absence?",
+        title = "Class 3 Breakdown: Which 3 maps agree on forest (while 3 others indicate non-forest)?",
         fontsize.title = 11
         )
 
