@@ -36,6 +36,8 @@ library(pacman)
 p_load(tidyverse, 
        scales,
        treemap,
+       ggfittext,
+       cowplot,
        install = TRUE)
 
 ```
@@ -273,6 +275,7 @@ oldcolours <- c("white", "#5985de", "#9ce6f1", "#f1ab4a",
  
 https://www.data-to-viz.com/graph/treemap.html
 https://r-graph-gallery.com/treemap.html
+https://wilkelab.org/cowplot/articles/plot_grid.html
 
 
 ```{r con_treemap}
@@ -283,17 +286,58 @@ consensus_all$treemap_group = c("Non-Forest: Full Consensus", "Non-Forest: High 
                                 "Forest: Low Consensus", "Forest: High Consensus", 
                                 "Forest: Full Consensus")
 
-# Plot tree map
-treemap(consensus_all,
-        index= "treemap_group",
-        vSize="total_area_ha",
-        type="index",
-        title = "",
-        palette = c("#0F5726", "#ABE071", "#EFF171", "#FFFFFF", "#DCDCDC", "#B4B6BB",
-                    "#F1AB4A")
+# Create tree map
+main_tree <- treemap(consensus_all,
+                     index= "treemap_group",
+                     vSize="total_area_ha",
+                     type="index",
+                     title = ""
+                     )
+
+# Prepare tree map output for ggplot
+main_tree_data <- main_tree[["tm"]] %>% 
+  as_tibble() %>% 
+  arrange(desc(vSize)) %>% 
+  mutate(rank = row_number(),
+         xmax = x0 + w,
+         ymax = y0 + h
+         )
+
+# Convert tree map to ggplot plot
+main_tree_plt <- ggplot(main_tree_data) +
+  geom_rect(aes(xmin = x0,
+                ymin = y0,
+                xmax = xmax,
+                ymax= ymax,
+                fill = color),
+            size = 0.1,
+            colour = "#1E1D23",
+            alpha = 0.9) +
+  geom_fit_text(data = main_tree_data,
+                aes(xmin = x0, 
+                    xmax = xmax, 
+                    ymin = y0,
+                    ymax = ymax,
+                    label = treemap_group),
+                colour = "black",
+                #family = "Lora",
+                size = 10,
+                #min.size = 4,
+                reflow = TRUE) + 
+  #labs(title = "Overall Consensus Category Breakdown") +
+  scale_fill_manual(values = c("#F1AB4A", "#DCDCDC","#EFF171", 
+                                "#ABE071", "#0F5726", "#FFFFFF","#B4B6BB")) +
+  theme_void() +
+  theme(legend.position = "none",
+        plot.title = element_text(size = 10,
+                                  face = "bold",
+                                  hjust = 0.5)
         )
 
+main_tree_plt
+
 ```
+
 
 ```{r con_treemap_class1}
 
@@ -317,23 +361,89 @@ class1_fnf_combo <- class1_fnf_combo[2:7,2:4]
 class1_fnf_combo$forest_pixels <- as.numeric(class1_fnf_combo$forest_pixels)
 class1_fnf_combo$forest_area_ha <- as.numeric(class1_fnf_combo$forest_area_ha)
 
-# Add prettier name labels 
-class1_fnf_combo$fnf_combo_pretty = c("FAO",
-                                      "CORINE + LBM-DE",
-                                      "CORINE",
-                                      "Hansen/IGBP",
-                                      "JAXA",
-                                      "ESA"
-                                      ) 
+# Add labels for main category names
+# These correspond to the maps which agree with dominant class
+class1_fnf_combo$fnf_combo_main = c("Hansen/IGBP, ESA, JAXA, CORINE, CORINE+LBM-DE",
+                                    "Hansen/IGBP, ESA, JAXA, CORINE, FAO",
+                                    "Hansen/IGBP, ESA, JAXA, CORINE+LBM-DE, FAO",
+                                    "ESA, JAXA, CORINE, CORINE+LBM-DE, FAO",
+                                    "Hansen/IGBP, ESA, CORINE, CORINE+LBM-DE, FAO",
+                                    "Hansen/IGBP, JAXA, CORINE, CORINE+LBM-DE, FAO"
+                                    ) 
 
-# Plot tree map
-treemap(class1_fnf_combo,
-        index= "fnf_combo_pretty",
-        vSize="forest_area_ha",
-        type="index",
-        title = "Class 1 Breakdown: Which maps indicate forest presence, when all others indicate absence?",
-        fontsize.title = 11
+# Add labels for sub category names
+# These correspond to the maps which don't agree with dominant class
+class1_fnf_combo$fnf_combo_sub = c("FAO",
+                                   "CORINE + LBM-DE",
+                                   "CORINE",
+                                   "Hansen/IGBP",
+                                   "JAXA",
+                                   "ESA"
+                                   ) 
+  
+```
+
+
+```{r con_treemap_class1_plt}
+
+# Create tree map
+class1_tree <- treemap(class1_fnf_combo,
+                       index= c("fnf_combo_main", "fnf_combo_sub"),
+                       vSize="forest_area_ha",
+                       type="index",
+                       title = "",
+                       )
+
+# Prepare tree map output for ggplot
+class1_tree_data <- class1_tree[["tm"]] %>% 
+  as_tibble() %>% 
+  arrange(desc(vSize)) %>% 
+  mutate(rank = row_number(),
+         xmax = x0 + w,
+         ymax = y0 + h
+         ) %>%
+  drop_na(fnf_combo_sub)
+
+# Convert tree map to ggplot plot
+class1_tree_plt <- ggplot(class1_tree_data) +
+  geom_rect(aes(xmin = x0,
+                ymin = y0,
+                xmax = xmax,
+                ymax= ymax,
+                fill = color),
+            size = 0.1,
+            colour = "#1E1D23",
+            alpha = 0.9) +
+  geom_fit_text(data = class1_tree_data,
+                aes(xmin = x0, 
+                    xmax = xmax, 
+                    ymin = y0,
+                    ymax = ymax,
+                    label = fnf_combo_main),
+                colour = "black",
+                size = 10,
+                reflow = TRUE) + 
+  geom_fit_text(data = class1_tree_data,
+                aes(xmin = x0, 
+                    xmax = xmax, 
+                    ymin = y0,
+                    ymax = ymax,
+                    label = fnf_combo_sub),
+                place = "bottomright",
+                colour = "black",
+                size = 8,
+                reflow = TRUE) + 
+  #labs(title = "Class 1 Breakdown: Which 5 maps agreee on non-forest (while 1 other indicates forest)?") +
+  #scale_fill_manual(values = c("#F1AB4A", "#DCDCDC","#EFF171", 
+  #                              "#ABE071", "#0F5726", "#FFFFFF","#B4B6BB")) +
+  theme_void() +
+  theme(legend.position = "none",
+        plot.title = element_text(size = 10,
+                                  face = "bold",
+                                  hjust = 0.5)
         )
+
+class1_tree_plt
 
 ```
 
@@ -341,37 +451,7 @@ treemap(class1_fnf_combo,
 The ESA map is most likely to estimate forest presence in areas where the other maps estimate non-forest.
 
 
-```{r con_treemap_class1_alt}
-
-# CREATE ALTERNATE VERSION WHICH FOCUSES ON CONSENSUS RATHER THAN FOREST PRESENCE
-
-# Add labels for alternative display
-class1_fnf_combo$fnf_combo_alt = c("Hansen/IGBP, ESA, JAXA, CORINE, CORINE+LBM-DE",
-                                   "Hansen/IGBP, ESA, JAXA, CORINE, FAO",
-                                   "Hansen/IGBP, ESA, JAXA, CORINE+LBM-DE, FAO",
-                                   "ESA, JAXA, CORINE, CORINE+LBM-DE, FAO",
-                                   "Hansen/IGBP, ESA, CORINE, CORINE+LBM-DE, FAO",
-                                   "Hansen/IGBP, JAXA, CORINE, CORINE+LBM-DE, FAO"
-                                   ) 
-  
-
-# Plot tree map
-treemap(class1_fnf_combo,
-        index= c("fnf_combo_alt", "fnf_combo_pretty"),
-        vSize="forest_area_ha",
-        type="index",
-        title = "Class 1 Breakdown: Which 5 maps agreee on non-forest (while 1 other indicates forest)?",
-        fontsize.title = 11,
-        align.labels = list(c("center", "center"), c("right", "bottom"))
-        )
-
-```
-
-
 ```{r con_treemap_class2}
-
-# Adjust how many digits to display
-options(digits=9)
 
 # Read in CSV with adjusted column names
 class2_fnf_combo <- read_csv("outputs/treemap_class2_fnfcombo_natura_stats.csv", 
@@ -390,60 +470,47 @@ class2_fnf_combo <- class2_fnf_combo[2:16,2:4]
 class2_fnf_combo$forest_pixels <- as.numeric(class2_fnf_combo$forest_pixels)
 class2_fnf_combo$forest_area_ha <- as.numeric(class2_fnf_combo$forest_area_ha)
 
-# Add prettier name labels 
-class2_fnf_combo$fnf_combo_pretty = c("CORINE, FAO",
-                                      "CORINE, CORINE+LBM-DE",
-                                      "CORINE, Hansen/IGBP",
-                                      "ESA, CORINE",
-                                      "ESA, FAO",
-                                      "ESA, CORINE+LBM-DE",
-                                      "ESA, Hansen/IGBP",
-                                      "ESA, JAXA",
-                                      "CORINE+LBM-DE, FAO",
-                                      "CORINE+LBM-DE, Hansen/IGBP",
-                                      "Hansen/IGBP, FAO",
-                                      "JAXA, CORINE",
-                                      "JAXA, FAO",
-                                      "JAXA, CORINE+LBM-DE",
-                                      "JAXA, Hansen/IGBP"
-                                      ) 
+# Add labels for main category names
+# These correspond to the maps which agree with dominant class
+class2_fnf_combo$fnf_combo_main = c("Hansen/IGBP, ESA, JAXA, CORINE+LBM-DE",
+                                    "Hansen/IGBP, ESA, JAXA, FAO",
+                                    "ESA, JAXA, CORINE+LBM-DE, FAO",
+                                    "Hansen/IGBP, JAXA, CORINE+LBM-DE, FAO",
+                                    "Hansen/IGBP, JAXA, CORINE, CORINE+LBM-DE",
+                                    "Hansen/IGBP, JAXA, CORINE, FAO",
+                                    "JAXA, CORINE, CORINE+LBM-DE, FAO",
+                                    "Hansen/IGBP, CORINE, CORINE+LBM-DE, FAO",
+                                    "Hansen/IGBP, ESA, JAXA, CORINE",
+                                    "ESA, JAXA, CORINE, FAO",
+                                    "ESA, JAXA, CORINE, CORINE+LBM-DE",
+                                    "Hansen/IGBP, ESA, CORINE+LBM-DE, FAO",
+                                    "Hansen/IGBP, ESA, CORINE, CORINE+LBM-DE",
+                                    "Hansen/IGBP, ESA, CORINE, FAO",
+                                    "ESA, CORINE, CORINE + LBM-DE, FAO"
+                                    ) 
 
-# Plot tree map
-treemap(class2_fnf_combo,
-        index= "fnf_combo_pretty",
-        vSize="forest_area_ha",
-        type="index",
-        title = "Class 2 Breakdown: Which 2 maps indicate forest presence, when 4 others indicate absence?",
-        fontsize.title = 11
-        )
-
-```
-
-
-```{r con_treemap_class2_alt}
-
-# CREATE ALTERNATE VERSION WHICH FOCUSES ON CONSENSUS RATHER THAN FOREST PRESENCE
-# Add labels for alternative display
-class2_fnf_combo$fnf_combo_alt = c("Hansen/IGBP, ESA, JAXA, CORINE+LBM-DE",
-                                   "Hansen/IGBP, ESA, JAXA, FAO",
-                                   "ESA, JAXA, CORINE+LBM-DE, FAO",
-                                   "Hansen/IGBP, JAXA, CORINE+LBM-DE, FAO",
-                                   "Hansen/IGBP, JAXA, CORINE, CORINE+LBM-DE",
-                                   "Hansen/IGBP, JAXA, CORINE, FAO",
-                                   "JAXA, CORINE, CORINE+LBM-DE, FAO",
-                                   "Hansen/IGBP, CORINE, CORINE+LBM-DE, FAO",
-                                   "Hansen/IGBP, ESA, JAXA, CORINE",
-                                   "ESA, JAXA, CORINE, FAO",
-                                   "ESA, JAXA, CORINE, CORINE+LBM-DE",
-                                   "Hansen/IGBP, ESA, CORINE+LBM-DE, FAO",
-                                   "Hansen/IGBP, ESA, CORINE, CORINE+LBM-DE",
-                                   "Hansen/IGBP, ESA, CORINE, FAO",
-                                   "ESA, CORINE, CORINE + LBM-DE, FAO"
+# Add labels for sub category names
+# These correspond to the maps which don't agree with dominant class
+class2_fnf_combo$fnf_combo_sub = c("CORINE, FAO",
+                                   "CORINE, CORINE+LBM-DE",
+                                   "CORINE, Hansen/IGBP",
+                                   "ESA, CORINE",
+                                   "ESA, FAO",
+                                   "ESA, CORINE+LBM-DE",
+                                   "ESA, Hansen/IGBP",
+                                   "ESA, JAXA",
+                                   "CORINE+LBM-DE, FAO",
+                                   "CORINE+LBM-DE, Hansen/IGBP",
+                                   "Hansen/IGBP, FAO",
+                                   "JAXA, CORINE",
+                                   "JAXA, FAO",
+                                   "JAXA, CORINE+LBM-DE",
+                                   "JAXA, Hansen/IGBP"
                                    ) 
 
 # Plot tree map
 treemap(class2_fnf_combo,
-        index= c("fnf_combo_alt", "fnf_combo_pretty"),
+        index= c("fnf_combo_main", "fnf_combo_sub"),
         vSize="forest_area_ha",
         type="index",
         title = "Class 2 Breakdown: Which 4 maps agreee on non-forest (while 2 others indicate forest)?",
@@ -451,6 +518,7 @@ treemap(class2_fnf_combo,
         fontsize.title = 11,
         align.labels = list(c("center", "center"), c("right", "bottom"))
         )
+
 
 ```
 
@@ -477,6 +545,14 @@ class3_fnf_combo <- class3_fnf_combo[2:16,2:4]
 class3_fnf_combo$forest_pixels <- as.numeric(class3_fnf_combo$forest_pixels)
 class3_fnf_combo$forest_area_ha <- as.numeric(class3_fnf_combo$forest_area_ha)
 
+# Add labels for main category names
+# For class 3, these correspond to the maps which agree on forests
+class3_fnf_combo$fnf_combo_main = c("")
+
+# Add labels for sub category names
+# For class 3, these correspond to the maps which agree on non-forests
+class3_fnf_combo$fnf_combo_sub = c("")
+
 # Plot tree map
 treemap(class3_fnf_combo,
         index= "fnf_combo",
@@ -487,3 +563,105 @@ treemap(class3_fnf_combo,
         )
 
 ```
+
+
+```{r con_treemap_class4}
+
+# Adjust how many digits to display
+options(digits=9)
+
+# Read in CSV with adjusted column names
+class4_fnf_combo <- read_csv("outputs/treemap_class4_fnfcombo_natura_stats.csv", 
+                             col_names = c("index", 
+                                           "fnf_combo", 
+                                           "forest_pixels",
+                                           "forest_area_ha"
+                                           ),
+                             show_col_types = FALSE
+                             )
+
+# Tidy-up: remove the first column (index) and first row (old column names)
+class4_fnf_combo <- class4_fnf_combo[2:16,2:4]
+
+# Convert columns to numeric
+class4_fnf_combo$forest_pixels <- as.numeric(class4_fnf_combo$forest_pixels)
+class4_fnf_combo$forest_area_ha <- as.numeric(class4_fnf_combo$forest_area_ha)
+
+# Plot tree map
+treemap(class4_fnf_combo,
+        index= "fnf_combo",
+        vSize="forest_area_ha",
+        type="index",
+        title = "Class 4 Breakdown: Which 4 maps agree on forest (while 2 others indicate non-forest)?",
+        fontsize.title = 11
+        )
+
+```
+
+
+
+
+
+```{r con_treemap_class5}
+
+# Adjust how many digits to display
+options(digits=9)
+
+# Read in CSV with adjusted column names
+class5_fnf_combo <- read_csv("outputs/treemap_class5_fnfcombo_natura_stats.csv", 
+                             col_names = c("index", 
+                                           "fnf_combo", 
+                                           "forest_pixels",
+                                           "forest_area_ha"
+                                           ),
+                             show_col_types = FALSE
+                             )
+
+# Tidy-up: remove the first column (index) and first row (old column names)
+class5_fnf_combo <- class5_fnf_combo[2:16,2:4]
+
+# Convert columns to numeric
+class5_fnf_combo$forest_pixels <- as.numeric(class5_fnf_combo$forest_pixels)
+class5_fnf_combo$forest_area_ha <- as.numeric(class5_fnf_combo$forest_area_ha)
+
+# Plot tree map
+treemap(class5_fnf_combo,
+        index= "fnf_combo",
+        vSize="forest_area_ha",
+        type="index",
+        title = "Class 5 Breakdown: Which 5 maps agree on forest (while 1 other indicates non-forest)?",
+        fontsize.title = 11
+        )
+
+```
+
+
+
+```{r all_tree_maps}
+
+# Use cowplot to assemble tree maps into one figure
+
+row2 <- plot_grid(class1_tree_plt, NULL, labels = c('b', 'c'), label_size = 12, ncol = 2)
+row3 <- plot_grid(NULL, NULL, labels = c('d', 'e'), label_size = 12, ncol = 2)
+
+plot_grid(main_tree_plt, row2, row3,
+          labels = c('a', '', ''),
+          label_size = 12,
+          #rel_widths = c(2, 1),
+          #rel_heights = 4,
+          ncol = 1)
+
+
+```
+
+```{r all_tree_maps_save}
+
+# Once happy with the outputs, save them!
+# Note this will output whatever plot was run last!
+ggsave("outputs/figures/tree_maps.png",
+       width=7,
+       height=10
+       )
+
+```
+
