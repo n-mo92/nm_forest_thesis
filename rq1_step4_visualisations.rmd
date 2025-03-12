@@ -360,7 +360,7 @@ treemap(class1_fnf_combo,
         index= c("fnf_combo_alt", "fnf_combo_pretty"),
         vSize="forest_area_ha",
         type="index",
-        title = "Class 1 Breakdown: Which 5 maps agreee on non-forest (while 1 other indicate forest)?",
+        title = "Class 1 Breakdown: Which 5 maps agreee on non-forest (while 1 other indicates forest)?",
         fontsize.title = 11,
         align.labels = list(c("center", "center"), c("right", "bottom"))
         )
@@ -423,7 +423,6 @@ treemap(class2_fnf_combo,
 ```{r con_treemap_class2_alt}
 
 # CREATE ALTERNATE VERSION WHICH FOCUSES ON CONSENSUS RATHER THAN FOREST PRESENCE
-
 # Add labels for alternative display
 class2_fnf_combo$fnf_combo_alt = c("Hansen/IGBP, ESA, JAXA, CORINE+LBM-DE",
                                    "Hansen/IGBP, ESA, JAXA, FAO",
