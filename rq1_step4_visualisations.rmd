@@ -78,11 +78,11 @@ fnf_mean_ha <- mean(as.numeric(fnf_all$total_forest_ha))
 
 # Change names of FNF maps to be more space efficient
 fnf_all <- fnf_all %>% 
-  mutate(fnf_map = str_replace(fnf_map, "Hansen Tree Cover", "Hansen/IGBP")) %>%
+  mutate(fnf_map = str_replace(fnf_map, "Hansen Tree Cover", "H/I")) %>%
   mutate(fnf_map = str_replace(fnf_map, "ESA Land Cover", "ESA")) %>%
-  mutate(fnf_map = str_replace(fnf_map, "JAXA Forest/Non-Forest", "JAXA")) %>%
-  mutate(fnf_map = str_replace(fnf_map, "CORINE Land Use", "CORINE")) %>%
-  mutate(fnf_map = str_replace(fnf_map, "Germany Land Use", "CORINE + LBM-DE")) %>%
+  mutate(fnf_map = str_replace(fnf_map, "JAXA Forest/Non-Forest", "JAX")) %>%
+  mutate(fnf_map = str_replace(fnf_map, "CORINE Land Use", "COR")) %>%
+  mutate(fnf_map = str_replace(fnf_map, "Germany Land Use", "DE")) %>%
   mutate(fnf_map = str_replace(fnf_map, "FAO-Forest Approximation", "FAO")) 
 
 ```
@@ -98,8 +98,8 @@ https://ggplot2-book.org/themes#sec-themes
 ```{r fnf_bar}
 
 # Define the order I want the bars in
-fnf_order = c("Hansen/IGBP", "ESA", "JAXA",
-              "CORINE", "CORINE + LBM-DE", "FAO")
+fnf_order = c("H/I", "ESA", "JAX",
+              "COR", "DE", "FAO")
 
 # Create a bar chart of the total forest, with the mean as dashed-line
 ggplot(data=fnf_all, aes(x=factor(fnf_map, fnf_order), y=total_forest_ha/1000000)) +
@@ -331,12 +331,12 @@ main_tree_plt
 
 # Create the abbreviations for the FNF maps here
 # This allows me to change them more easily in the future (only need to change here)
-hansen <- "H"
-esa <- "E"
-jaxa <- "J"
-corine <- "C"
-ger <- "D"
-fao <- "F"
+hansen <- "H/I"
+esa <- "ESA"
+jaxa <- "JAX"
+corine <- "COR"
+ger <- "DE"
+fao <- "FAO"
 
 # Define the separating character(s)
 sep=", "
@@ -729,7 +729,7 @@ class3_tree_plt <- ggplot(class3_tree_data) +
                     label = fnf_combo_sub),
                 place = "bottomright",
                 colour = "black",
-                size = c(16, 10, 8, 6, 6, 6, 6, 6, 4, 4, 4),
+                size = c(16, 10, 8, 6, 6, 6, 6, 6, 4, 4, 3),
                 reflow = TRUE) + 
   labs(title = "Uncertain: No Consensus") +
   theme_void() +
@@ -846,7 +846,7 @@ class4_tree_plt <- ggplot(class4_tree_data) +
                     ymax = ymax,
                     label = fnf_combo_main),
                 colour = "black",
-                size = c(20, 12, 12, 10, 8, 8, 8, 8, 8, 4),
+                size = c(20, 12, 12, 10, 8, 8, 8, 8, 6, 4),
                 reflow = TRUE) + 
   geom_fit_text(data = class4_tree_data,
                 aes(xmin = x0, 
@@ -856,7 +856,7 @@ class4_tree_plt <- ggplot(class4_tree_data) +
                     label = fnf_combo_sub),
                 place = "bottomright",
                 colour = "black",
-                size = c(16, 10, 10, 8, 6, 6, 6, 6, 6, 0),
+                size = c(16, 10, 10, 8, 6, 6, 6, 6, 4, 0),
                 reflow = TRUE) + 
   labs(title = "Forest: Low Consenus") +
   theme_void() +
@@ -954,7 +954,7 @@ class5_tree_plt <- ggplot(class5_tree_data) +
                     ymax = ymax,
                     label = fnf_combo_main),
                 colour = "black",
-                size = c(20, 12, 12, 10, 6),
+                size = c(20, 12, 12, 10, 4),
                 reflow = TRUE) + 
   geom_fit_text(data = class5_tree_data,
                 aes(xmin = x0, 
@@ -964,7 +964,7 @@ class5_tree_plt <- ggplot(class5_tree_data) +
                     label = fnf_combo_sub),
                 place = "bottomright",
                 colour = "black",
-                size = c(16, 10, 10, 8, 6),
+                size = c(16, 10, 10, 8, 3),
                 reflow = TRUE) + 
   labs(title = "Forest: High Consensus") +
   theme_void() +
@@ -980,7 +980,7 @@ class5_tree_plt
 
 
 
-Now generate a figure with all the treemaps together.
+Now generate a figure with all the treemaps together. **NOTE:** This will look messy in the Rmd outputs - check the save output figure in the next step to see what it really looks like.  
 
 
 ```{r all_tree_maps}
@@ -1000,7 +1000,7 @@ plot_grid(main_tree_plt, class1_tree_plt,
 
 # Once happy with the outputs, save them!
 # Note this will output whatever plot was run last!
-ggsave("outputs/figures/tree_maps_v1.png",
+ggsave("outputs/figures/tree_maps.png",
        width=23,
        height=12
        )
@@ -1008,13 +1008,3 @@ ggsave("outputs/figures/tree_maps_v1.png",
 ```
 
 
-```{r all_tree_maps_save}
-
-# Once happy with the outputs, save them!
-# Note this will output whatever plot was run last!
-ggsave("outputs/figures/tree_maps_v2.png",
-       width=23,
-       height=12
-       )
-
-```
