@@ -53,6 +53,11 @@ ROBOTSTXT_OBEY = True
 #DOWNLOADER_MIDDLEWARES = {
 #    "wikiloc_scrapy.middlewares.WikilocScrapyDownloaderMiddleware": 543,
 #}
+# From: https://github.com/clemfromspace/scrapy-cloudflare-middleware?tab=readme-ov-file
+#DOWNLOADER_MIDDLEWARES = {
+#    # The priority of 560 is important, because we want this middleware to kick in just before the scrapy built-in `RetryMiddleware`.
+#    'scrapy_cloudflare_middleware.middlewares.CloudFlareMiddleware': 560
+#}
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
