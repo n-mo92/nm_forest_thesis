@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 from scrapy.http import Request
-
+"""
 class WikilocSpiderSpider(scrapy.Spider):
     name = 'wiki'
     allowed_domains = ['wikiloc.com']
@@ -17,9 +17,10 @@ class WikilocSpiderSpider(scrapy.Spider):
             link = t.xpath('./article/div[1]/h2/a/@href').extract_first() #updated xpath 27/03/2025
             if link is not None:
                 item={}
-                item["Link"] = link #response.urljoin(link)
+                item["Link"] = response.urljoin(link) #edited from link 
                 yield item
         if next is not None:
             #base = response.url.split('?')[0] 
             next_page = response.urljoin(next) #edited from base + next
             yield Request(next_page, self.parse_detail)
+"""
