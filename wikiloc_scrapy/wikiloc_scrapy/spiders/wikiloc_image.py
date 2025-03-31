@@ -15,8 +15,8 @@ class WikilocSpiderSpider(scrapy.Spider):
         item = {}
         js = json.loads(response.xpath('//script[@type="application/ld+json"]').extract()[1].replace('\n','').replace('\t','').replace('<script type="application/ld+json">','').replace('</script>',''))
         item['url_track'] = response.url
-        item['track name'] = response.xpath('//h1[@class="d-inline dont-break-out"]/text()').extract_first().strip().replace(';',',')
-        item['user_name'] = response.xpath('//div[@class="user-info"]/h3/a/text()').extract_first().replace(';',',')
+        item['track_name'] = response.xpath('//h1/text()').extract_first().strip().replace(";",',') #updated xpath 31/03/2025
+        # NOTE: I removed author scraping completely (not needed and avoids any privacy issues)
         item['Date'] =  js['datePublished']
         images = response.xpath('//div[@class="simplecard"]')
         for im in images:

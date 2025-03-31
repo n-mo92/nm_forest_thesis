@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 from scrapy.http import Request
-"""
+
 class WikilocSpiderSpider(scrapy.Spider):
     name = 'wiki'
     allowed_domains = ['wikiloc.com']
@@ -23,4 +23,3 @@ class WikilocSpiderSpider(scrapy.Spider):
             #base = response.url.split('?')[0] 
             next_page = response.urljoin(next) #edited from base + next
             yield Request(next_page, self.parse_detail)
-"""

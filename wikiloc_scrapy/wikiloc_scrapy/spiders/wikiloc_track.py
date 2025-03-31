@@ -4,6 +4,7 @@ import json
 import re
 import pandas as pd
 
+
 class WikilocSpiderSpider(scrapy.Spider):
     name = 'wiki_track'
     allowed_domains = ['wikiloc.com']
@@ -43,9 +44,14 @@ class WikilocSpiderSpider(scrapy.Spider):
                 comment_list.append(comment)
         item['comments'] = comment_list if comment_list else ["None"]        
         
-        # Everything below has been updated, but it is not needed for my analysis
-        # NOTE: I removed author scraping completely (not needed and avoids any privacy issues) 
-        """
+        yield item
+
+
+
+# Everything below has been updated, but it is not needed for my analysis
+# NOTE: I removed author scraping completely (not needed and avoids any privacy issues)
+# To add it back in, make sure if comes before the "yield item" command 
+"""
         item['difficulty'] = response.xpath('//div[@class="d-item big"]/dd/text()').extract_first() #updated xpath 31/03/2025
         
         vd = response.xpath('//div[@class="trail-hits"]/p/text()').extract()
@@ -74,5 +80,5 @@ class WikilocSpiderSpider(scrapy.Spider):
                 conv_fac = 0.539957
                 d = re.findall("\d+", Distance)[0]
                 item['distance_km'] = "{:.2f}".format(int(d) / float(conv_fac))
-        """
-        yield item
+"""
+        
