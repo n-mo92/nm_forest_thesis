@@ -1,33 +1,25 @@
 # -*- coding: utf-8 -*-
 import scrapy
-import json
-import re
 from scrapy.http import Request
 
 class WikilocSpiderSpider(scrapy.Spider):
     name = 'wiki'
     allowed_domains = ['wikiloc.com']
     start_urls = ['https://www.wikiloc.com/trails/outdoor/germany/bremen']   #your link
-    #liste = [] # NM: not used?
     def parse(self, response):
-        # NM: for ul added [1] to only get city filters (and not activity type filters)
-        villes = response.xpath('//div[@id="filters"]/ul[1]/li/a/@href').extract()
+        villes = response.xpath('//div[@id="filters"]/ul[1]/li/a/@href').extract() #updated xpath 27/03/2025
         for v in villes :
             yield Request(v, self.parse_detail)
     def parse_detail(self, response):
-        #NM: hard-code base URL
-        base = 'https://www.wikiloc.com/trails/outdoor/germany/bremen' #your link
         trails = response.xpath('//ul[@class="trail-list"]/li')
-        # NM: changed xpath from '//a[@class="next"]/@href'
-        next = response.xpath('//a[@rel="next"]/@href').extract_first()
+        next = response.xpath('//a[@rel="next"]/@href').extract_first() #updated xpath 27/03/2025      
         for t in trails:
-            # NM: changed xpath from './div/div/h3/a/@href'
-            link = t.xpath('./article/div[1]/h2/a/@href').extract_first()
+            link = t.xpath('./article/div[1]/h2/a/@href').extract_first() #updated xpath 27/03/2025
             if link is not None:
                 item={}
-                item["Link"] = link
+                item["Link"] = link #response.urljoin(link)
                 yield item
         if next is not None:
-            # NM: adjust to use hard-coded base URL 
-            next_page = base + next
+            #base = response.url.split('?')[0] 
+            next_page = response.urljoin(next) #edited from base + next
             yield Request(next_page, self.parse_detail)

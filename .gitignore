@@ -4,3 +4,4 @@ rawdata/
 processing/
 outputs/
 thesis_env_conda/
+wikiloc_scrapy/wikiloc_scrapy/spiders/crawling_outputs/
