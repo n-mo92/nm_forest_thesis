@@ -11,20 +11,20 @@ class WikilocSpiderSpider(scrapy.Spider):
     start_urls = list(pd.read_csv("crawling_outputs\link-bremen.csv")["Link"])
 
     def parse(self, response):
+        # Original scraping from A.Chai-allah 
+        # NM updated xpaths (31/03/2025)
         item = {}
-        item['track_name'] = response.xpath('//h1/text()').extract_first().strip().replace(";",',') #updated xpath 31/03/2025
+        item['track_name'] = response.xpath('//h1/text()').extract_first().strip().replace(";",',') 
         item['url_track'] = response.url 
-        #item['track .gpx'] = ""	#needed?
-        item['track_type'] = response.xpath('//div[@class="view__header__breadcrumb"]/a/@title').extract_first() #updated xpath 31/03/2025
-        
+        item['track_type'] = response.xpath('//div[@class="view__header__breadcrumb"]/a/@title').extract_first() 
         js = json.loads(response.xpath('//script[@type="application/ld+json"]').extract()[1].replace('\n','').replace('\t','').replace('<script type="application/ld+json">','').replace('</script>',''))    
-        item['date_published'] = js['datePublished'] 
-        item['date_recorded'] = response.xpath('//dl[@class= "more-data"]/div[5]/dd/text()').extract_first() #NM added 'date_recorded' item on 31/03/2025 (sometimes returns null)
-        
-        item['description text'] = response.xpath('//div[@class="description dont-break-out "]/text()').extract_first() #xpath updated 31/03/2025
+        item['date_published'] = js['datePublished']      
+        item['description text'] = response.xpath('//div[@class="description dont-break-out "]/text()').extract_first() 
 
-        # NM: extract photo captions - title and body (31/03/2025)
-        # Note photos are also waypoints (ie they have coordinates on the map)
+        #NM: extract date recorded (31/03/2025) - note, this sometimes returns null
+        item['date_recorded'] = response.xpath('//dl[@class= "more-data"]/div[5]/dd/text()').extract_first() 
+
+        # NM: extract photo/waypoint captions - title and body (31/03/2025)
         photo_container = response.xpath('//div[@id="cointainer-simplecard"]/div[@class="wpcard"]')
         caption_list = []
         for photo in photo_container:
@@ -45,6 +45,34 @@ class WikilocSpiderSpider(scrapy.Spider):
                 comment_list.append(comment)
         item['comments'] = comment_list if comment_list else ["None"]        
         
+        # NM: Extract photo/waypoint latitude and longitude coordinates (03/04/2025)
+        wp_json_container = response.xpath('//div[@id="cointainer-simplecard"]')
+        lat_list = []
+        long_list = []
+        for wp in wp_json_container:
+            json_selector = wp.xpath('.//script[@type="application/ld+json"]').extract()
+            for json_script in json_selector:
+                wp_json = json.loads(json_script.replace('\n','').replace('\t','').replace('<script type="application/ld+json">','').replace('</script>',''))  
+                lat = wp_json['geo']['latitude']
+                long = wp_json['geo']['longitude']
+                if lat is not None:
+                    lat_list.append(float(lat))
+                if long is not None:
+                    long_list.append(float(long))
+        # Note I do not write the output until after next part because I'm still adding to the lat and long lists            
+        
+        #NM: Extract start coordinates and append to lists (03/04/2025)
+        start_lat = js['mainEntity']['geo']['latitude']
+        lat_list.append(float(start_lat))
+
+        start_long = js['mainEntity']['geo']['longitude']
+        long_list.append(float(start_long))
+
+        # ALL lats/longs (from photo/waypoints and trail start)
+        # Despite else stmnt, there should always be at least 1 lat and long (from the start coordinates)
+        item['latitudes'] = lat_list if lat_list else ["None"]  
+        item['longitudes'] = long_list if long_list else ["None"]  
+
         yield item
 
 
