@@ -24,6 +24,7 @@ class WikilocSpiderSpider(scrapy.Spider):
         item['description text'] = response.xpath('//div[@class="description dont-break-out "]/text()').extract_first() #xpath updated 31/03/2025
 
         # NM: extract photo captions - title and body (31/03/2025)
+        # Note photos are also waypoints (ie they have coordinates on the map)
         photo_container = response.xpath('//div[@id="cointainer-simplecard"]/div[@class="wpcard"]')
         caption_list = []
         for photo in photo_container:
