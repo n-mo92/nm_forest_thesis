@@ -76,6 +76,8 @@ DEFAULT_REQUEST_HEADERS = {
 To make the scraping more polite, it is important to add delays to the request so that the website servers are not overwhelmed (which is not nice for them and also could lead to future requests from your IP address being blocked). This website provides using information on adding delays and autothrottle to scrapy spiders: https://scrapeops.io/python-scrapy-playbook/scrapy-delay-between-requests/
 
 In the settings.py folder the following lines should be added (these are included in the settings.py folder by default but are commented out - so you just need to uncomment these lines):
+DOWNLOAD_DELAY = 2 # ~minimum delay (approximately minimum because of randomisation)
+RANDOMIZE_DOWNLOAD_DELAY = True # for 2 second delay this means delay will be between 1-3 sec
 AUTOTHROTTLE_ENABLED = True 
 AUTOTHROTTLE_START_DELAY = 5 #initial download delay (seconds)
 AUTOTHROTTLE_MAX_DELAY = 60 #maximum download delay (seconds)
@@ -83,8 +85,5 @@ AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0 # The lower the number the politer your sc
 
 See the link above for details about how the auto-throttle works.
 
-Another option is (instead of using auto-throttle) is to manually specify delays, including some randomisation:
-DOWNLOAD_DELAY = 2 # ~minimum delay (approximately minimum because of randomisation)
-RANDOMIZE_DOWNLOAD_DELAY = True # for 2 second delay this means delay will be between 1-3 sec
 
 

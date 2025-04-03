@@ -86,8 +86,8 @@ DEFAULT_REQUEST_HEADERS = {
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
 # NM edits as per https://scrapeops.io/python-scrapy-playbook/scrapy-delay-between-requests/
-#DOWNLOAD_DELAY = 2 # ~minimum delay (approximately minimum because of randomisation)
-#RANDOMIZE_DOWNLOAD_DELAY = True # for 2 second delay this means delay will be between 1-3 sec
+DOWNLOAD_DELAY = 2 # ~minimum delay (approximately minimum because of randomisation)
+RANDOMIZE_DOWNLOAD_DELAY = True # for 2 second delay this means delay will be between 1-3 sec
 AUTOTHROTTLE_ENABLED = True 
 # The initial download delay
 AUTOTHROTTLE_START_DELAY = 5
