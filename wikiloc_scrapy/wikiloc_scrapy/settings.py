@@ -86,16 +86,16 @@ DEFAULT_REQUEST_HEADERS = {
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
 # NM edits as per https://scrapeops.io/python-scrapy-playbook/scrapy-delay-between-requests/
-DOWNLOAD_DELAY = 2 # ~minimum delay (approximately minimum because of randomisation)
+DOWNLOAD_DELAY = 1.5 # ~minimum delay (approximately minimum because of randomisation)
 RANDOMIZE_DOWNLOAD_DELAY = True # for 2 second delay this means delay will be between 1-3 sec
 AUTOTHROTTLE_ENABLED = True 
 # The initial download delay
-AUTOTHROTTLE_START_DELAY = 5
+AUTOTHROTTLE_START_DELAY = 2.5
 # The maximum download delay to be set in case of high latencies
 AUTOTHROTTLE_MAX_DELAY = 60
 # The average number of requests Scrapy should be sending in parallel to
 # each remote server
-AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0 # The lower the number the politer your scraper
+AUTOTHROTTLE_TARGET_CONCURRENCY = 1.5 # The lower the number the politer your scraper
 # Enable showing throttling stats for every response received:
 #AUTOTHROTTLE_DEBUG = False
 
