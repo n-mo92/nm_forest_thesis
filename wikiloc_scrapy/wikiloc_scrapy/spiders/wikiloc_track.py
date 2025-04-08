@@ -21,8 +21,8 @@ class WikilocSpiderSpider(scrapy.Spider):
         item['date_published'] = js['datePublished']      
         item['description text'] = response.xpath('//div[@class="description dont-break-out "]/text()').extract_first() 
 
-        #NM: extract date recorded (31/03/2025) - note, this sometimes returns null
-        item['date_recorded'] = response.xpath('//dl[@class= "more-data"]/div[5]/dd/text()').extract_first() 
+        #NM: extract date recorded (08/04/2025)
+        item['date_recorded'] = response.xpath('//dl[@class= "more-data"]/div[last()]/dd/text()').extract_first() 
 
         # NM: extract photo/waypoint captions - title and body (31/03/2025)
         photo_container = response.xpath('//div[@id="cointainer-simplecard"]/div[@class="wpcard"]')
