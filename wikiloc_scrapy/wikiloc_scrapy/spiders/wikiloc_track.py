@@ -20,6 +20,27 @@ class WikilocSpiderSpider(scrapy.Spider):
         js = json.loads(response.xpath('//script[@type="application/ld+json"]').extract()[1].replace('\n','').replace('\t','').replace('<script type="application/ld+json">','').replace('</script>',''))    
         item['date_published'] = js['datePublished']      
         item['description text'] = response.xpath('//div[@class="description dont-break-out "]/text()').extract_first() 
+        Distance = response.xpath('//div[@class="d-item"]/dd/text()').extract_first() #updated xpath 31/03/2025
+        # The following converts all distances to km (from miles/nautical miles)
+        # and removes unit from value (NM added km to item name for clarity)
+        if '.' in Distance:
+            if "nautical" not in Distance:
+                conv_fac = 0.621371
+                d = re.findall("\d+\.\d+", Distance)[0]
+                item['distance_km'] = "{:.2f}".format(float(d) / float(conv_fac))
+            elif "nautical" in Distance:
+                conv_fac = 0.539957
+                d = re.findall("\d+\.\d+", Distance)[0]
+                item['distance_km'] = "{:.2f}".format(float(d) / float(conv_fac))
+        else:
+            if "nautical" not in Distance:
+                conv_fac = 0.621371
+                d = re.findall("\d+", Distance)[0]
+                item['distance_km'] = "{:.2f}".format(int(d) / float(conv_fac))
+            elif "nautical" in Distance:
+                conv_fac = 0.539957
+                d = re.findall("\d+", Distance)[0]
+                item['distance_km'] = "{:.2f}".format(int(d) / float(conv_fac))
 
         #NM: extract date recorded (08/04/2025)
         item['date_recorded'] = response.xpath('//dl[@class= "more-data"]/div[last()]/dd/text()').extract_first() 
@@ -79,7 +100,7 @@ class WikilocSpiderSpider(scrapy.Spider):
 
 # Everything below has been updated, but it is not needed for my analysis
 # NOTE: I removed author scraping completely (not needed and avoids any privacy issues)
-# To add it back in, make sure if comes before the "yield item" command 
+# To add anything back in, make sure it comes before the "yield item" command 
 """
         item['difficulty'] = response.xpath('//div[@class="d-item big"]/dd/text()').extract_first() #updated xpath 31/03/2025
         
@@ -87,27 +108,6 @@ class WikilocSpiderSpider(scrapy.Spider):
         item['viewed'] = ''.join(re.findall(r'\d+',vd[0]))	
         item['downloaded'] = ''.join(re.findall(r'\d+',vd[1]))
         
-        Distance = response.xpath('//div[@class="d-item"]/dd/text()').extract_first() #updated xpath 31/03/2025
-        # The following converts all distances to km 
-        # (usually stored in miles or nautical miles)
-        # and removes unit from value (NM added km to item name for clarity)
-        if '.' in Distance:
-            if "nautical" not in Distance:
-                conv_fac = 0.621371
-                d = re.findall("\d+\.\d+", Distance)[0]
-                item['distance_km'] = "{:.2f}".format(float(d) / float(conv_fac))
-            elif "nautical" in Distance:
-                conv_fac = 0.539957
-                d = re.findall("\d+\.\d+", Distance)[0]
-                item['distance_km'] = "{:.2f}".format(float(d) / float(conv_fac))
-        else:
-            if "nautical" not in Distance:
-                conv_fac = 0.621371
-                d = re.findall("\d+", Distance)[0]
-                item['distance_km'] = "{:.2f}".format(int(d) / float(conv_fac))
-            elif "nautical" in Distance:
-                conv_fac = 0.539957
-                d = re.findall("\d+", Distance)[0]
-                item['distance_km'] = "{:.2f}".format(int(d) / float(conv_fac))
+
 """
         
