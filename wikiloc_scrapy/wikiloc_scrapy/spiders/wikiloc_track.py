@@ -8,7 +8,7 @@ import pandas as pd
 class WikilocSpiderSpider(scrapy.Spider):
     name = 'wiki_track'
     allowed_domains = ['wikiloc.com']
-    start_urls = list(pd.read_csv("crawling_outputs\link-niedersachsen.csv")["Link"])
+    start_urls = list(pd.read_csv("crawling_outputs\link-bremen.csv")["Link"])
 
     def parse(self, response):
         # Original scraping from A.Chai-allah 
@@ -66,10 +66,16 @@ class WikilocSpiderSpider(scrapy.Spider):
                 comment_list.append(comment)
         item['comments'] = comment_list if comment_list else ["None"]        
         
-        # NM: Extract photo/waypoint latitude and longitude coordinates (03/04/2025)
+        # NM: Extract start coordinates and photo/waypoint coordinates (03/04/2025)
         wp_json_container = response.xpath('//div[@id="cointainer-simplecard"]')
         lat_list = []
         long_list = []
+        # Extract/append trail start coordinates first so order is correct
+        start_lat = js['mainEntity']['geo']['latitude']
+        lat_list.append(float(start_lat))
+        start_long = js['mainEntity']['geo']['longitude']
+        long_list.append(float(start_long))
+        # Now extract/append waypoint coordinates 
         for wp in wp_json_container:
             json_selector = wp.xpath('.//script[@type="application/ld+json"]').extract()
             for json_script in json_selector:
@@ -80,15 +86,6 @@ class WikilocSpiderSpider(scrapy.Spider):
                     lat_list.append(float(lat))
                 if long is not None:
                     long_list.append(float(long))
-        # Note I do not write the output until after next part because I'm still adding to the lat and long lists            
-        
-        #NM: Extract start coordinates and append to lists (03/04/2025)
-        start_lat = js['mainEntity']['geo']['latitude']
-        lat_list.append(float(start_lat))
-
-        start_long = js['mainEntity']['geo']['longitude']
-        long_list.append(float(start_long))
-
         # ALL lats/longs (from photo/waypoints and trail start)
         # Despite else stmnt, there should always be at least 1 lat and long (from the start coordinates)
         item['latitudes'] = lat_list if lat_list else ["None"]  
