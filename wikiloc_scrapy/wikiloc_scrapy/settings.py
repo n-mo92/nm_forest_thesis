@@ -42,7 +42,7 @@ ROBOTSTXT_OBEY = True
 #    "Accept-Language": "en",
 #}
 # NM added
-# From: https://www.zenrows.com/blog/scrapy-headers#most-important-ones
+# From: https://www.zenrows.com/blog/scrapy-headers#why-are-they-important
 DEFAULT_REQUEST_HEADERS = {
     'Accept-Language': 'en-US,en;q=0.9',
     "Referer": "https://www.google.com/",
