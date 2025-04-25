@@ -8,7 +8,7 @@ import pandas as pd
 class WikilocSpiderSpider(scrapy.Spider):
     name = 'wiki_track'
     allowed_domains = ['wikiloc.com']
-    start_urls = list(pd.read_csv("crawling_outputs\link-niedersachsen.csv")["Link"])
+    start_urls = list(pd.read_csv("crawling_outputs\link-saxonyanhalt.csv")["Link"])
 
     def parse(self, response):
         # Original scraping from A.Chai-allah 
