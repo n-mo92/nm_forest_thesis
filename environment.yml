@@ -370,6 +370,7 @@ dependencies:
   - widgetsnbextension=4.0.14=pyhd8ed1ab_0
   - win_inet_pton=1.1.0=pyh7428d3b_8
   - winpty=0.4.3=4
+  - wordcloud=1.9.4=py312h4389bb4_1
   - wrapt=1.17.2=py312h4389bb4_0
   - x265=3.5=h2d74725_3
   - xarray=2025.1.1=pyhd8ed1ab_0
