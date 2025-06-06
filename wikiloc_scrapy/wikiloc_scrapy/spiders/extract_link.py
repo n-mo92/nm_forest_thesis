@@ -5,7 +5,7 @@ from scrapy.http import Request
 class WikilocSpiderSpider(scrapy.Spider):
     name = 'wiki'
     allowed_domains = ['wikiloc.com']
-    start_urls = ['https://www.wikiloc.com/trails/outdoor/germany/brandenburg']   #your link
+    start_urls = ['https://www.wikiloc.com/trails/outdoor/germany/hamburg']   #your link
     # Loop through the activity types
     def parse(self, response):
         activities = response.xpath('//div[@class="activities__carousel__container"]/ul[1]/li/a/@href').extract() #updated xpath 06/06/2025
