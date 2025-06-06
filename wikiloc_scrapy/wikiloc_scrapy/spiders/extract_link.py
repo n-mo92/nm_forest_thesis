@@ -5,16 +5,18 @@ from scrapy.http import Request
 class WikilocSpiderSpider(scrapy.Spider):
     name = 'wiki'
     allowed_domains = ['wikiloc.com']
-    start_urls = ['https://www.wikiloc.com/trails/outdoor/germany/baden-wurttemberg']   #your link
+    start_urls = ['https://www.wikiloc.com/trails/outdoor/germany/brandenburg']   #your link
+    # Loop through the activity types
     def parse(self, response):
-        villes = response.xpath('//div[@id="filters"]/ul[1]/li/a/@href').extract() #updated xpath 27/03/2025
-        for v in villes :
-            yield Request(v, self.parse_detail)
+        activities = response.xpath('//div[@class="activities__carousel__container"]/ul[1]/li/a/@href').extract() #updated xpath 06/06/2025
+        for a in activities :
+            yield Request(a, self.parse_detail)
+    # Extract the trail links, allowing for pagination
     def parse_detail(self, response):
-        trails = response.xpath('//ul[@class="trail-list"]/li')
-        next = response.xpath('//a[@rel="next"]/@href').extract_first() #updated xpath 27/03/2025      
+        trails = response.xpath('//ul[@class="landing__body__trails__list"]/li') #updated xpath 06/06/2025 
+        next = response.xpath('//a[@rel="next"]/@href').extract_first() #updated xpath 06/06/2025      
         for t in trails:
-            link = t.xpath('./article/div[1]/h2/a/@href').extract_first() #updated xpath 27/03/2025
+            link = t.xpath('./article/div[1]/h3/a/@href').extract_first() #updated xpath 06/06/2025
             if link is not None:
                 item={}
                 item["Link"] = response.urljoin(link) #edited from link 
@@ -23,3 +25,5 @@ class WikilocSpiderSpider(scrapy.Spider):
             #base = response.url.split('?')[0] 
             next_page = response.urljoin(next) #edited from base + next
             yield Request(next_page, self.parse_detail)
+
+
