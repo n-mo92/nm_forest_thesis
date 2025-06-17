@@ -9,7 +9,7 @@ class WikilocSpiderSpider(scrapy.Spider):
     # Loop through the activity types
     def parse(self, response):
         activities = response.xpath('//div[@class="activities__carousel__container"]/ul[1]/li/a/@href').extract() #updated xpath 06/06/2025
-        for a in activities :
+        for a in activities:
             yield Request(a, self.parse_detail)
     # Extract the trail links, allowing for pagination
     def parse_detail(self, response):
