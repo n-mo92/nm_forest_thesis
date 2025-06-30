@@ -5,7 +5,7 @@ from scrapy.http import Request
 class WikilocSpiderSpider(scrapy.Spider):
     name = 'wiki_large'
     allowed_domains = ['wikiloc.com']
-    start_urls = ['https://www.wikiloc.com/directory/JuqRut']   # link to place list WITHIN region
+    start_urls = ['https://www.wikiloc.com/directory/H28cj2']   # link to place list WITHIN region
     # Loop through the towns in the region
     def parse(self, response):
         towns = response.xpath('//div[@class="directory__item__list__item"]/a/@href').extract() #updated xpath 06/06/2025
