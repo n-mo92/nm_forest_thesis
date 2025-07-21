@@ -10,7 +10,7 @@ To answer these research questions I use a combination of geospatial analysis (R
 
 A preview of some of the outputs:
 
-![RQ1: forest consensus map](other/figure_selection/rq1_consenus_summary_3_map.png)
+![RQ1: forest consensus map](other/figure_selection/rq1_consenus_summary_3_map.png =200x200)
 
 <img src="https://github.com/n-mo92/nm_forest_thesis/blob/3b7df74dcfa0cdd9100dd54510fac2ebac8b5ab5/other/figure_selection/rq1_consenus_summary_3_map.png" width="200" height="200" />
 
