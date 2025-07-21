@@ -10,7 +10,7 @@ To answer these research questions I use a combination of geospatial analysis (R
 
 A preview of some of the outputs:
 
-![RQ1: forest consensus map](other/figure_selection/rq1_consenus_summary_3_map.png)
+![RQ1: forest consensus map](other/figure_selection/rq1_consenus_summary_3_map_sm.png)
 
 ![RQ2: word clouds](other/figure_selection/rq2_word_clouds.png)
 
