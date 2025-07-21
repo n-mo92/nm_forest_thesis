@@ -10,7 +10,12 @@ To answer these research questions I use a combination of geospatial analysis (R
 
 A preview of some of the outputs:
 
-![forest consensus map](https://github.com/n-mo92/nm_forest_thesis/blob/a139ba8e46275469204dc6bf6517d6782d42c755/other/figure_selection/rq1_consenus_summary_3_map.png)
+![RQ1: forest consensus map](other/figure_selection/rq1_consenus_summary_3_map.png)
+
+![RQ2: word clouds](other/figure_selection/rq2_word_clouds.png)
+
+![RQ3: word comparisons](other/figure_selection/rq3_token_counts_per_cluster_class.png)
+
 
 
 
