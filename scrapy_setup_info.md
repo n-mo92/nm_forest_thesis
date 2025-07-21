@@ -1,18 +1,21 @@
-### scrapy set-up: general & customisations
+### scrapy set-up: general set-up, required changes & customisations
 
-In this document, I describe the process of setting up scrapy including accessing the pre-existing spiders created by A. Chai-allah in his repository [Wiki4CES](https://github.com/achaiallah-hub/Wiki4CES) and making customisations to avoid permission errors and make the scraping more polite. This document probably makes the most sense if used in combination with the information from rq2_step1_data_collection.ipynb
+In this document, I describe the process of how I set up scrapy for my thesis work - including accessing the pre-existing spiders created by A. Chai-allah in his repository [Wiki4CES](https://github.com/achaiallah-hub/Wiki4CES) - however, since the Wikiloc website changed since the creation of the Wiki4CES repo, I also provide updated spiders in this repo (in /wikiloc_scrapy/wikiloc_scrapy/spiders/). For more details on the necessary changes to adapt to the new website stucture (including changes to xpath expresssions) see the notes within the spider .py files and in the rq2_step1_data_collection.ipynb file. Finally, in this document I also describe the customisations I made to avoid permission errors and make the scraping more polite.
 
-This involves the steps:
+This document is intended for use in combination with the information from rq2_step1_data_collection.ipynb
+
+Steps:
 1. Install scrapy
 2. Create a scrapy "Project"
-3. Download spiders from Wiki4CES repo
+3. Download spiders from Wiki4CES repo (OR updated versions from this repo)
 4. Adjust scrapy settings: add default request headers 
 5. Adjust scrapy settings: add delays between requests 
 
-*Note that these instructions are based on having a conda environment with installations set to come from the conda-forge channel only.*
+*Note that these instructions are based on having a conda environment with installations from the conda-forge channel only.*
 
 #### Step 1: Install scrapy
 This is simply a matter of activating the conda environment and running: *conda install scrapy*. My defaults are set to install from the conda-forge channel. 
+
 
 #### Step 2: Create a scrapy "project"
 To run scrapy you need to set up a scrapy "project". 
@@ -29,7 +32,7 @@ Helpful scrapy information: https://docs.scrapy.org/en/latest/intro/tutorial.htm
 #### Step 3: Download spiders from Wiki4CES repo
 Next you need to add the scrapy "spiders" (the processes which crawl and scrape information from the web) as .py scripts to the directory wikiloc_scrapy/wikiloc_scrapy/spiders. Basically, the .py scripts from the achaiallah-hub repo need to be saved in this directory. 
 
-**IMPORTANT** These are the steps I followed, however I have since made changes to the original spiders, some of which are specific to my work, and some of which were necessary to scrape the data properly (namely updates to xpath expressions). In this case it would perhaps make sense to use the information below, but instead copy/clone the updated spiders from my repo (extract_link.py, wikiloc_track.py, wikiloc_image.py).
+**IMPORTANT** These are the steps I followed initially, however I have since made changes to the original spiders, some of which are specific to my work, and some of which are **necessary to scrape the data properly (namely updates to xpath expressions and to adapt to other changes in the website structure)**. In this case it would perhaps make sense to use the information below, but instead copy/clone the updated spiders from my repo (extract_link.py, extract_link_large.py and wikiloc_track.py) in /wikiloc_scrapy/wikiloc_scrapy/spiders/.
 
 In Anaconda Prompt:
 
@@ -39,7 +42,7 @@ In Anaconda Prompt:
 4. git pull origin main
 5. Afterwards, delete the git files which are created in wikiloc_scrapy\wikiloc_scrapy\spiders (otherwise you end up working on the achiallah-hub Wiki4CES repo rather than your own repo!)
 
-**NOTE** Instead of Steps 2-4 I first just tried the simple command git clone https://github.com/achaiallah-hub/Wiki4CES.git This works, but it stores the .py scripts inside a repo directory folder called Wiki4CES, and I think this causes problems when trying to use the spiders later. Steps 2-4 are a work-around: this way the python scripts are directly within the "spiders" directory without being inside another directory. In order to do steps 2-4 an **ssh-key** needs to be set up. 
+**NOTE** Instead of Steps 2-4, at first I just tried the simple command git clone https://github.com/achaiallah-hub/Wiki4CES.git This works, but it stores the .py scripts inside a repo directory folder called Wiki4CES, and I think this causes problems when trying to use the spiders later. Steps 2-4 are a work-around: this way the python scripts are directly within the "spiders" directory without being inside another directory. In order to do steps 2-4 an **ssh-key** needs to be set up. 
 
 
 #### Step 4: Adjust scrapy settings: add default request headers 
