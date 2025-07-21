@@ -12,7 +12,8 @@ To answer these research questions I use a combination of geospatial analysis (R
 
 *For RQ1: Forest consensus map (a) with examples of Natura 2000 sites with no consensus on forest presence (b) and full consensus on forest presence (c).*
 
-<img src="other/figure_selection/rq1_consenus_summary_3_map.png" alt="forest consensus map" align="center" width="525" height="375" />
+<div style="text-align: center"><img src="/other/figure_selection/rq1_consenus_summary_3_map.png" alt="forest consensus map" width="525" height="375" /></div>
+
 
 *For RQ2: Word clouds generated from Wikiloc trail text for forest areas in Natura 2000 sites. after cleaning and filtering, text was vectorised using a word2vec model and then clustered using K-means.*
 
