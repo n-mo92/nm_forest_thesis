@@ -17,15 +17,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Information about visualisations
 
-In this R Markdown script, I create *some* of the visualisations which I plan to include in my thesis. 
-For now (for ease and time efficiency) I decided to take the following general strategy with making the visualisations:
-- Tables are made directly in word
-- Figures like bar charts and plots are made in R (HERE)
-- Maps are made in QGIS
+In this R Markdown script, I create some of the visualisations which I plan to include in my thesis. Others are created in the main Jupyter Notebook files or non-programatically using QGIS.
 
-If I have time later, I would like to come back to do more visualisations programmatically, but I'll have to see how I get on :)
+In this Rmd I create the following visualisations:
+1. Bar chart for total forest in the Germany Natura 2000 sites per Forest/Non-forest (FNF) map.
+2. Bar chart for total area in the Germany Natura 2000 sites according to the forest consensus class.
+3. A multi-plot figure with 6 tree maps (1 overall, 5 for each class from 1-5) for showing which FNF maps tend to agree with each other and which do not.
 
-While I have been using Visual Studio Code for all Python scripts so far, I have used R Studio to create this R Markdown file and simply push my changes in this file (which is contained within the same folder as my other code) to GitHub using the git management features in Visual Studio Code.
 
 ```{r install}
 
@@ -45,7 +43,7 @@ p_load(tidyverse,
 
 ## FNF Visualisations
 
-- Create a bar chart of total forest per FNF map with dashed line for mean
+First I create a bar chart of the total forest per FNF map (i.e. per forest product definition/operationalisation). I also show the mean across the 6 products with a dashed line.
 
 ```{r fnf_prep}
 
@@ -88,11 +86,9 @@ fnf_all <- fnf_all %>%
 ```
 
 
-Helpful material for ggplot styling:
+Resources for ggplot styling:
 https://ggplot2.tidyverse.org/articles/faq-axes.html 
 https://ggplot2-book.org/themes#sec-themes
-
-
 
 
 ```{r fnf_bar}
@@ -136,7 +132,7 @@ ggplot(data=fnf_all, aes(x=factor(fnf_map, fnf_order), y=total_forest_ha/1000000
 
 ```
 **NOTE**
-Some things may look off in the rmd version of the figure - it will look a bit different in the saved png!
+Some times the proportions may look off in the rmd version of the figure - it will look a bit different in the saved png.
 
 
 ```{r fnf_save}
@@ -153,7 +149,7 @@ ggsave("outputs/figures/fnf_all_bar_chart.png",
 
 ## Forest Consensus Visualisations
 
-- Create a bar chart of total area in each class (see pic in "writing folder")
+In this section I create a bar chart of total area of the Germany Natura 2000 sites within each consensus class from the forest presence/absence consensus map.
 
 
 ```{r con_prep}
@@ -189,7 +185,7 @@ consensus_all$coverage_per <- as.numeric(consensus_all$coverage_per)
 ```
 
 
-Note the colours here are selected to be used for the consensus map as well. I used a colour-blind safe palette (https://color.adobe.com/create/color-accessibility) with aim to highlight non-consensus areas compared to consensus forest. 
+Note the colours here are selected in order to be consistent with the consensus map itself. I used a colour-blind safe palette (https://color.adobe.com/create/color-accessibility) with aim to highlight non-consensus areas compared to consensus forest. 
 
 
 ```{r con_bar}
@@ -262,11 +258,16 @@ ggsave("outputs/figures/consensus_bar_chart.png",
 ```
 
 
- Ross also suggested creating a tree map with the consensus map data. 
- 
+## Tree map visualisations
+
+In the next section I compare which forest definitions (FNF maps) agree with each other for the different consensus classes.
+
+Resources for tree maps and multi-plot figures:
 https://www.data-to-viz.com/graph/treemap.html
 https://r-graph-gallery.com/treemap.html
 https://wilkelab.org/cowplot/articles/plot_grid.html
+
+First I create the main tree map which simply shows a breakdown of the classes overall (i.e. the size of the boxes in the tree map are according to the amount of area in that class). In the subsequent steps I create tree maps for class 1-5 (I skip class 0 and 6 as in these classes all the forest maps agree on either non-forest or forest, respectively). The final step is to combine all tree maps into a single, multi-plot figure.
 
 
 ```{r con_treemap}
@@ -327,6 +328,10 @@ main_tree_plt
 
 ```
 
+
+In the next section I set up the controls for the naming and colour palette generation.
+
+
 ```{r treemap_prep}
 
 # Create the abbreviations for the FNF maps here
@@ -371,6 +376,9 @@ class5_pal_new = c("#78c679", "#9dd689", "#c2e699", "#e1f3b3", "#f1ffe3")
   
   
 ```
+
+
+Now I generate the tree map figure for class 1 (i.e. which FNF maps agree on non-forest)
 
 
 ```{r con_treemap_class1}
@@ -482,6 +490,8 @@ class1_tree_plt
 
 
 The ESA map is most likely to estimate forest presence in areas where the other maps estimate non-forest.
+
+Now I generate the tree map figure for class 2 (i.e. which FNF maps agree on non-forest)
 
 
 ```{r con_treemap_class2}
@@ -605,6 +615,9 @@ class2_tree_plt <- ggplot(class2_tree_data) +
 class2_tree_plt
 
 ```
+
+
+Now I generate the tree map figure for class 3 (i.e. which FNF maps agree on forest - in this class there's an even split)
 
 
 ```{r con_treemap_class3}
@@ -744,6 +757,9 @@ class3_tree_plt
 ```
 
 
+Now I generate the tree map figure for class 4 (i.e. which FNF maps agree on forest)
+
+
 ```{r con_treemap_class4}
 
 # Adjust how many digits to display
@@ -871,6 +887,9 @@ class4_tree_plt
 ```
 
 
+Now I generate the tree map figure for class 5 (i.e. which FNF maps agree on forest)
+
+
 ```{r con_treemap_class5}
 
 # Adjust how many digits to display
@@ -979,8 +998,7 @@ class5_tree_plt
 ```
 
 
-
-Now generate a figure with all the treemaps together. **NOTE:** This will look messy in the Rmd outputs - check the save output figure in the next step to see what it really looks like.  
+Finally, I generate a figure with all the tree maps together. **NOTE:** This will look messy in the Rmd outputs - check the save output figure in the next step to see what it really looks like.  
 
 
 ```{r all_tree_maps}
