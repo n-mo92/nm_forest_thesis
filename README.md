@@ -10,11 +10,13 @@ To answer these research questions I use a combination of geospatial analysis (R
 
 A preview of some of the outputs:
 
-<img src="other/figure_selection/rq1_consenus_summary_3_map.png" width="350" height="250" />
+<img src="other/figure_selection/rq1_consenus_summary_3_map.png" width="525" height="375" />
 
-![RQ2: word clouds](other/figure_selection/rq2_word_clouds.png)
 
-![RQ3: word comparisons](other/figure_selection/rq3_token_counts_per_cluster_class.png)
+<img src="other/figure_selection/rq2_word_clouds.png" width="600" height="225" />
+
+<img src="other/figure_selection/rq3_token_counts_per_cluster_class.png" width="375" height="420" />
+
 
 
 
