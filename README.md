@@ -21,9 +21,9 @@ For **RQ2** the relevant files (in order of use) are: rq2_step1_data_collection.
 For **RQ3** the processing script is contained in rq3_all_steps.ipynb, however this script relies on the outputs from RQ1 and RQ2. 
 
 
-#### Output Preview
+#### Output preview
 
-*For RQ1: Forest consensus map (a) with examples of Natura 2000 sites with no consensus on forest presence (b) and full consensus on forest presence (c).*
+*For RQ1: Forest consensus map (a) with examples of Natura 2000 sites with no consensus on forest presence (b) and full consensus on forest presence (c). Note the map itself is output by code in this repository, but I created this particular figure in QGIS*
 
 <img src="other/figure_selection/rq1_consenus_summary_3_map.png" alt="forest consensus" width="525" height="375" />
 
@@ -36,7 +36,7 @@ For **RQ3** the processing script is contained in rq3_all_steps.ipynb, however t
 <img src="other/figure_selection/rq3_token_counts_per_cluster_class.png" alt="word frequency comparison" width="560" height="630" />
 
 
-#### Data Acknowledgements
+#### Data acknowledgements
 
 Due to size limitations, this repository does not contain all the original data used in the processing steps. 
 
