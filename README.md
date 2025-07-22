@@ -12,10 +12,10 @@ To answer these research questions I use a combination of geospatial analysis (R
 
 #### Using the code
 
-I performed the analysis for all three research questions in a Python (3.12.7) conda environment (environment.yml). The steps for each research question alongside commented code in Juypter Notebooks. To create some of the final figures I also made use of R (Rmd available in this repository) and manual map creation in QGIS. 
+I performed the analysis for all three research questions in a Python (3.12.7) conda environment ([environment.yml](environment.yml)). The steps for each research question alongside commented code in Juypter Notebooks. To create some of the final figures I also made use of R (Rmd available in this repository) and manual map creation in QGIS. 
 
 For **RQ1** the relevant files (in order of use) are: 
-1. rq1_step1_data_prep.ipynb (which runs rq1_step1_sub1_rasterise.bat, rq1_step1_sub2_upsample.bat and rq1_step1_sub3_clip.bat)
+1. [rq1_step1_data_prep.ipynb](rq1_step1_data_prep.ipynb) (which runs rq1_step1_sub1_rasterise.bat, rq1_step1_sub2_upsample.bat and rq1_step1_sub3_clip.bat)
 2. rq1_step2_fao_forest.ipynb
 3. rq1_step3_comp.ipynb
 4. rq1_step4_visualisations.rmd
@@ -42,9 +42,9 @@ For **RQ3** the processing script is contained in rq3_all_steps.ipynb, however t
 <img src="other/figure_selection/rq3_token_counts_per_cluster_class.png" alt="word frequency comparison" width="560" height="630" />
 
 
-#### Source Data 
+#### Data & Method Information
 
-Due to size limitations, this repository does not contain all the original data used in the processing steps. 
+To answer my research questions, I made use of open-access datasets and methods published in scientific journals. Due to size limitations, this repository does not contain the original data used in the processing steps, however references and access information are provided in the relevant Jupyter Notebooks. For clarity, this information is also summarised below:
 
 For **RQ1**, I relied on the following datasets:
 
@@ -63,7 +63,7 @@ As **RQ3** uses a combination of the outputs from RQ1 and RQ2, no additional dat
 
 #### Acknowledgements
 
-A big thank you to Prof. Dr. Ross Purves for his supervision on this project. Thank you also to Dr. Abdesslam Chai-allah for providing his [Wiki4CES](https://github.com/achaiallah-hub/Wiki4CES) repository, as well as additional use information and encouragement. 
+A sincere thank you to Prof. Dr. Ross Purves for his supervision on this project. Thank you also to Dr. Abdesslam Chai-allah for providing his [Wiki4CES](https://github.com/achaiallah-hub/Wiki4CES) repository, as well as additional information and encouragement. 
 
 #### Contact Information
 
