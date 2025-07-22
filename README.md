@@ -12,11 +12,17 @@ To answer these research questions I use a combination of geospatial analysis (R
 
 #### Using the code
 
-I have documented the steps for each research question alongside commented code in Juypter Notebook and R Markdown files. 
+I performed the analysis for all three research questions in a Python (3.12.7) conda environment (environment.yml). The steps for each research question alongside commented code in Juypter Notebooks. To create some of the final figures I also made use of R (Rmd available in this repository) and manual map creation in QGIS. 
 
-For **RQ1** the relevant files (in order of use) are: [rq1_step1_data_prep.ipynb] (which runs rq1_step1_sub1_rasterise.bat, rq1_step1_sub2_upsample.bat and rq1_step1_sub3_clip.bat), rq1_step2_fao_forest.ipynb, rq1_step3_comp.ipynb and rq1_step4_visualisations.rmd
+For **RQ1** the relevant files (in order of use) are: 
+1. rq1_step1_data_prep.ipynb (which runs rq1_step1_sub1_rasterise.bat, rq1_step1_sub2_upsample.bat and rq1_step1_sub3_clip.bat)
+2. rq1_step2_fao_forest.ipynb
+3. rq1_step3_comp.ipynb
+4. rq1_step4_visualisations.rmd
 
-For **RQ2** the relevant files (in order of use) are: rq2_step1_data_collection.ipynb (with relevant information in scrapy_setup_info.md and scraping tools in the wikiloc_scrapy folder) and rq2_step2_text_analysis.ipynb
+For **RQ2** the relevant files (in order of use) are: 
+1. rq2_step1_data_collection.ipynb (with relevant information in scrapy_setup_info.md and scraping tools in the wikiloc_scrapy folder)
+2. rq2_step2_text_analysis.ipynb
 
 For **RQ3** the processing script is contained in rq3_all_steps.ipynb, however this script relies on the outputs from RQ1 and RQ2. 
 
@@ -36,7 +42,7 @@ For **RQ3** the processing script is contained in rq3_all_steps.ipynb, however t
 <img src="other/figure_selection/rq3_token_counts_per_cluster_class.png" alt="word frequency comparison" width="560" height="630" />
 
 
-#### Data acknowledgements
+#### Source Data 
 
 Due to size limitations, this repository does not contain all the original data used in the processing steps. 
 
@@ -51,10 +57,17 @@ For **RQ1**, I relied on the following datasets:
 
 Further details and download information for these datasets are provided in rq1_step1_data_prep.ipynb under Step 1. As part of RQ1, I also replicated the general methodologies from Sexton et al (2016) for creating the forest consensus map and Johnson et al (2023) for creating an FAO-aligned forest map.
 
-For **RQ2**, I built upon the public repository [Wiki4CES](https://github.com/achaiallah-hub/Wiki4CES) by A. Chai-allah from the publication Chai-allah et al (2023). This repository scrapes URLs and trail content from the outdoor trail platform [Wikiloc](https://www.wikiloc.com). My modifcations to the scraping tools from Wiki4CES are described in rq2_step1_data_collection.ipynb and scrapy_setup_info.md and are indicated with comments in the scraping spiders provided in the wikiloc_scrapy folder. Additionally, for RQ2 I replicated some of the general methods from Chai-allah et al (2023).
+For the data collection for **RQ2**, I built upon the public repository [Wiki4CES](https://github.com/achaiallah-hub/Wiki4CES) by Dr. Chai-allah from the publication Chai-allah et al (2023). This repository scrapes URLs and trail content from the outdoor trail platform [Wikiloc](https://www.wikiloc.com). My modifcations to the scraping tools from Wiki4CES are described in rq2_step1_data_collection.ipynb and scrapy_setup_info.md and are indicated with comments in the scraping spiders provided in the wikiloc_scrapy folder. Additionally, for RQ2 I replicated some of the general methods from Chai-allah et al (2023).
 
 As **RQ3** uses a combination of the outputs from RQ1 and RQ2, no additional data was required.
 
+#### Acknowledgements
+
+A big thank you to Prof. Dr. Ross Purves for his supervision on this project. Thank you also to Dr. Abdesslam Chai-allah for providing his [Wiki4CES](https://github.com/achaiallah-hub/Wiki4CES) repository, as well as additional use information and encouragement. 
+
+#### Contact Information
+
+For questions about this repository or my thesis, please contact me at <a href="ninadanielle.moffat\@uzh.ch">ninadanielle.moffat\@uzh.ch</a> 
 
 #### Citations
 
