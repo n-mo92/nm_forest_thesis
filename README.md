@@ -58,9 +58,9 @@ For **RQ1**, I relied on the following datasets:
 - LBM-DE / CORINE Land Cover 5 ha (Bundesamt für Kartographie und Geodäsie, 2021)
 - Natura 2000 Protected Sites (European Environment Agency, 2024)
 
-Further details and download information for these datasets are provided in rq1_step1_data_prep.ipynb under Step 1. As part of RQ1, I also replicated the general methodologies from Sexton et al (2016) for creating the forest consensus map and Johnson et al (2023) for creating an FAO-aligned forest map.
+Further details and download information for these datasets are provided in [rq1_step1_data_prep.ipynb](rq1_step1_data_prep.ipynb) under Step 1. As part of RQ1, I also replicated the general methodologies from Sexton et al (2016) for creating the forest consensus map and Johnson et al (2023) for creating an FAO-aligned forest map.
 
-For the data collection for **RQ2**, I built upon the public repository [Wiki4CES](https://github.com/achaiallah-hub/Wiki4CES) by Dr. Chai-allah from the publication Chai-allah et al (2023). This repository scrapes URLs and trail content from the outdoor trail platform [Wikiloc](https://www.wikiloc.com). My modifcations to the scraping tools from Wiki4CES are described in rq2_step1_data_collection.ipynb and scrapy_setup_info.md and are indicated with comments in the scraping spiders provided in the wikiloc_scrapy folder. Additionally, for RQ2 I replicated some of the general methods from Chai-allah et al (2023).
+For the data collection for **RQ2**, I built upon the public repository [Wiki4CES](https://github.com/achaiallah-hub/Wiki4CES) by Dr. Chai-allah from the publication Chai-allah et al (2023). This repository scrapes URLs and trail content from the outdoor trail platform [Wikiloc](https://www.wikiloc.com). My modifcations to the scraping tools from Wiki4CES are described in [rq2_step1_data_collection.ipynb](rq2_step1_data_collection.ipynb) and [scrapy_setup_info.md](scrapy_setup_info.md) and are indicated with comments in the individual [scrapy spiders](wikiloc_scrapy/wikiloc_scrapy/spiders/). Additionally, for RQ2 I replicated some of the general methods from Chai-allah et al (2023).
 
 As **RQ3** uses a combination of the outputs from RQ1 and RQ2, no additional data was required.
 
