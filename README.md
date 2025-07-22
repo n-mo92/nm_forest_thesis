@@ -1,6 +1,6 @@
-### Towards holistic forest monitoring in Europe: An exploration of forest definitions, cultural ecosystem services and their interactions in Germany’s Natura 2000 sites
+## Towards holistic forest monitoring in Europe: An exploration of forest definitions, cultural ecosystem services and their interactions in Germany’s Natura 2000 sites
 
-#### Summary
+### Summary
 
 This repository contains all the scripts for my MSc thesis at the University of Zurich. The files are generally organised by my three research questions (RQs):
 
@@ -10,7 +10,8 @@ This repository contains all the scripts for my MSc thesis at the University of 
 
 To answer these research questions I use a combination of geospatial analysis (RQ1) and natural language processing (RQ2/RQ3). 
 
-#### Output preview
+
+### Output preview
 
 *For RQ1: Forest consensus map (a) with examples of Natura 2000 sites with no consensus on forest presence (b) and full consensus on forest presence (c). Note the map itself is output by code in this repository, but I created this particular figure in QGIS*
 
@@ -25,7 +26,7 @@ To answer these research questions I use a combination of geospatial analysis (R
 <img src="other/figure_selection/rq3_token_counts_per_cluster_class.png" alt="word frequency comparison" width="560" height="630" />
 
 
-#### Data & Method Information
+### Data & Method Information
 
 To answer my research questions, I made use of open-access datasets and methods published in scientific journals. Due to size limitations, this repository does not contain the original data used in the processing steps, however references and access information are provided in the relevant Jupyter Notebooks. For clarity, this information is also summarised below:
 
@@ -45,7 +46,7 @@ For the data collection for **RQ2**, I built upon the public repository [Wiki4CE
 As **RQ3** uses a combination of the outputs from RQ1 and RQ2, no additional data was required.
 
 
-#### Using the code
+### Using the code
 
 I performed the analysis for all three research questions in a Python (3.12.7) conda environment ([environment.yml](environment.yml)). The steps for each research question alongside commented code in Juypter Notebooks. To create some of the final figures I also made use of R (Rmd available in this repository) and manual map creation in QGIS. 
 
@@ -65,17 +66,17 @@ For **RQ2** the relevant files (in order of use) are:
 For **RQ3** the processing script is contained in [rq3_all_steps.ipynb](rq3_all_steps.ipynb), however this script relies on the outputs from RQ1 and RQ2. 
 
 
-#### Acknowledgements
+### Acknowledgements
 
 A sincere thank you to Prof. Dr. Ross Purves for his supervision on this project. Thank you also to Dr. Abdesslam Chai-allah for providing his [Wiki4CES](https://github.com/achaiallah-hub/Wiki4CES) repository, as well as additional information and encouragement. 
 
 
-#### Contact Information
+### Contact Information
 
 For questions about this repository or my thesis, please contact me at <a href="ninadanielle.moffat\@uzh.ch">ninadanielle.moffat\@uzh.ch</a> 
 
 
-#### Citations
+### Citations
 
 Bundesamt für Kartographie und Geodäsie. (2021). *CORINE Land Cover 5 ha, Stand 2018 (CLC5-2018)*. https://sgx.geodatenzentrum.de/web_public/gdz/dokumentation/deu/clc5_2018.pdf
 
