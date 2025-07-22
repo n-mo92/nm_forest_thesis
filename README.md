@@ -14,7 +14,7 @@ To answer these research questions I use a combination of geospatial analysis (R
 
 <img src="other/figure_selection/rq1_consenus_summary_3_map.png" alt="forest consensus" width="525" height="375" />
 
-*For RQ2: Word clouds generated from Wikiloc trail text for forest areas in Natura 2000 sites. after cleaning and filtering, text was vectorised using a word2vec model and then clustered using K-means.*
+*For RQ2: Word clouds generated from Wikiloc trail text for forest areas in Natura 2000 sites. After cleaning and filtering, text was vectorised using a word2vec model and then clustered using K-means.*
 
 <img src="other/figure_selection/rq2_word_clouds.png" alt="word clouds" width="600" height="480" />
 
