@@ -8,7 +8,11 @@ This repository contains all the scripts for my MSc thesis at the University of 
 2)	**How do people value forests?** What cultural ecosystem services are experienced by people recreating in forests in the Natura 2000 network in Germany?
 3)	**How does the way people value forest relate to forest definition?** Do the observed cultural ecosystem services change in areas where there is consensus on forest presence compared to areas where there is no consensus?
 
-To answer these research questions I use a combination of geospatial analysis (RQ1) and natural language processing (RQ2/RQ3). I have documented the steps for each research question alongside the code in the Juypter Notebook and R Markdown files. 
+To answer these research questions I use a combination of geospatial analysis (RQ1) and natural language processing (RQ2/RQ3). 
+
+#### Using the code
+
+I have documented the steps for each research question alongside commented code in Juypter Notebook and R Markdown files. 
 
 For **RQ1** the relevant files (in order of use) are: rq1_step1_data_prep.ipynb (which runs rq1_step1_sub1_rasterise.bat, rq1_step1_sub2_upsample.bat and rq1_step1_sub3_clip.bat), rq1_step2_fao_forest.ipynb, rq1_step3_comp.ipynb and rq1_step4_visualisations.rmd
 
