@@ -1,8 +1,8 @@
 ### scrapy set-up: general set-up, required changes & customisations
 
-In this document, I describe the process of how I set up scrapy for my thesis work - including accessing the pre-existing spiders created by A. Chai-allah in his repository [Wiki4CES](https://github.com/achaiallah-hub/Wiki4CES) - however, since the Wikiloc website changed since the creation of the Wiki4CES repo, I also provide updated spiders in this repo (in /wikiloc_scrapy/wikiloc_scrapy/spiders/). For more details on the necessary changes to adapt to the new website stucture (including changes to xpath expresssions) see the notes within the spider .py files and in the rq2_step1_data_collection.ipynb file. Finally, in this document I also describe the customisations I made to avoid permission errors and make the scraping more polite.
+In this document, I describe the process of how I set up scrapy for my thesis work - including accessing the pre-existing spiders created by A. Chai-allah in his repository [Wiki4CES](https://github.com/achaiallah-hub/Wiki4CES) - however, since the Wikiloc website changed since the creation of the Wiki4CES repo, I also provide updated spiders in this repo ([wikiloc_scrapy/wikiloc_scrapy/spiders/](wikiloc_scrapy/wikiloc_scrapy/spiders/)). For more details on the necessary changes to adapt to the new website stucture (including changes to xpath expresssions) see the comments in the spider .py files and in [rq2_step1_data_collection.ipynb](rq2_step1_data_collection.ipynb). Finally, in this document I also describe the customisations I made to avoid permission errors and make the scraping more polite.
 
-This document is intended for use in combination with the information from rq2_step1_data_collection.ipynb
+This document is intended for use in combination with the information from [rq2_step1_data_collection.ipynb](rq2_step1_data_collection.ipynb)
 
 Steps:
 1. Install scrapy
@@ -30,9 +30,9 @@ Helpful scrapy information: https://docs.scrapy.org/en/latest/intro/tutorial.htm
 
 
 #### Step 3: Download spiders from Wiki4CES repo
-Next you need to add the scrapy "spiders" (the processes which crawl and scrape information from the web) as .py scripts to the directory wikiloc_scrapy/wikiloc_scrapy/spiders. Basically, the .py scripts from the achaiallah-hub repo need to be saved in this directory. 
+Next you need to add the scrapy "spiders" (the processes which crawl and scrape information from the web) as .py scripts to the directory [wikiloc_scrapy/wikiloc_scrapy/spiders/](wikiloc_scrapy/wikiloc_scrapy/spiders/). Basically, the .py scripts from the achaiallah-hub repo need to be saved in this directory. 
 
-**IMPORTANT** These are the steps I followed initially, however I have since made changes to the original spiders, some of which are specific to my work, and some of which are **necessary to scrape the data properly (namely updates to xpath expressions and to adapt to other changes in the website structure)**. In this case it would perhaps make sense to use the information below, but instead copy/clone the updated spiders from my repo (extract_link.py, extract_link_large.py and wikiloc_track.py) in /wikiloc_scrapy/wikiloc_scrapy/spiders/.
+**IMPORTANT** These are the steps I followed initially, however I have since made changes to the original spiders, some of which are specific to my work, and some of which are **necessary to scrape the data properly (namely updates to xpath expressions and to adapt to other changes in the website structure)**. In this case it would perhaps make sense to use the information below, but instead copy/clone the updated spiders from my repo: [extract_link.py](wikiloc_scrapy/wikiloc_scrapy/spiders/extract_link.py), [extract_link_large.py](wikiloc_scrapy/wikiloc_scrapy/spiders/extract_link_large.py) and [wikiloc_track.py](wikiloc_scrapy/wikiloc_scrapy/spiders/wikiloc_track.py).
 
 In Anaconda Prompt:
 
@@ -78,7 +78,8 @@ DEFAULT_REQUEST_HEADERS = {
 #### Step 5: Adjust scrapy settings: add delays between requests 
 To make the scraping more polite, it is important to add delays to the request so that the website servers are not overwhelmed (which is not nice for them and also could lead to future requests from your IP address being blocked). This website provides using information on adding delays and autothrottle to scrapy spiders: https://scrapeops.io/python-scrapy-playbook/scrapy-delay-between-requests/
 
-In the settings.py folder the following lines should be added (these are included in the settings.py folder by default but are commented out - so you just need to uncomment these lines):
+In the [settings.py](wikiloc_scrapy/wikiloc_scrapy/settings.py) folder the following lines should be added (these are included in the settings.py folder by default but are commented out - so you just need to uncomment these lines):
+
 DOWNLOAD_DELAY = 2 # ~minimum delay (approximately minimum because of randomisation)
 RANDOMIZE_DOWNLOAD_DELAY = True # for 2 second delay this means delay will be between 1-3 sec
 AUTOTHROTTLE_ENABLED = True 
