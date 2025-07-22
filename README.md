@@ -1,6 +1,6 @@
 ### Towards holistic forest monitoring in Europe: An exploration of forest definitions, cultural ecosystem services and their interactions in Germany’s Natura 2000 sites
 
-This repository contains all the set-up information and scripts for my MSc thesis at the University of Zurich. The files are generally organised by my three research questions (RQs):
+This repository contains all the scripts for my MSc thesis at the University of Zurich. The files are generally organised by my three research questions (RQs):
 
 1)	**What is considered to be forest?** How do different forest definitions and their geospatial operationalisations change what is counted as forest in the Natura 2000 network in Germany? Where is there consensus on forest presence and where is there no consensus?
 2)	**How do people value forests?** What cultural ecosystem services are experienced by people recreating in forests in the Natura 2000 network in Germany?
