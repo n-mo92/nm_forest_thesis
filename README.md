@@ -8,7 +8,14 @@ This repository contains all the scripts for my MSc thesis at the University of 
 2)	**How do people value forests?** What cultural ecosystem services are experienced by people recreating in forests in the Natura 2000 network in Germany?
 3)	**How does the way people value forest relate to forest definition?** Do the observed cultural ecosystem services change in areas where there is consensus on forest presence compared to areas where there is no consensus?
 
-To answer these research questions I use a combination of geospatial analysis (RQ1) and natural language processing (RQ2/RQ3). I have documented the steps for each RQ alongside the code in the Juypter Notebook and R Markdown files. 
+To answer these research questions I use a combination of geospatial analysis (RQ1) and natural language processing (RQ2/RQ3). I have documented the steps for each research question alongside the code in the Juypter Notebook and R Markdown files. 
+
+For **RQ1** the relevant files (in order of use) are: rq1_step1_data_prep.ipynb (which runs rq1_step1_sub1_rasterise.bat, rq1_step1_sub2_upsample.bat and rq1_step1_sub3_clip.bat), rq1_step2_fao_forest.ipynb, rq1_step3_comp.ipynb and rq1_step4_visualisations.rmd
+
+For **RQ2** the relevant files (in order of use) are: rq2_step1_data_collection.ipynb (with relevant information in scrapy_setup_info.md and scraping tools in the wikiloc_scrapy folder) and rq2_step2_text_analysis.ipynb
+
+For **RQ3** the processing script is contained in rq3_all_steps.ipynb, however this script relies on the outputs from RQ1 and RQ2. 
+
 
 #### Output Preview
 
@@ -23,6 +30,7 @@ To answer these research questions I use a combination of geospatial analysis (R
 *For RQ3: A comparison of the word/token frequencies for clusters of interest in areas where there is no consensus on forest presence versus areas where there is full consensus.*
 
 <img src="other/figure_selection/rq3_token_counts_per_cluster_class.png" alt="word frequency comparison" width="560" height="630" />
+
 
 #### Data Acknowledgements
 
@@ -42,6 +50,7 @@ Further details and download information for these datasets are provided in rq1_
 For **RQ2**, I built upon the public repository [Wiki4CES](https://github.com/achaiallah-hub/Wiki4CES) by A. Chai-allah from the publication Chai-allah et al (2023). This repository scrapes URLs and trail content from the outdoor trail platform [Wikiloc](https://www.wikiloc.com). My modifcations to the scraping tools from Wiki4CES are described in rq2_step1_data_collection.ipynb and scrapy_setup_info.md and are indicated with comments in the scraping spiders provided in the wikiloc_scrapy folder. Additionally, for RQ2 I replicated some of the general methods from Chai-allah et al (2023).
 
 As **RQ3** uses a combination of the outputs from RQ1 and RQ2, no additional data was required.
+
 
 #### Citations
 
