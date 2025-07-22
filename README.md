@@ -14,7 +14,7 @@ To answer these research questions I use a combination of geospatial analysis (R
 
 I have documented the steps for each research question alongside commented code in Juypter Notebook and R Markdown files. 
 
-For **RQ1** the relevant files (in order of use) are: rq1_step1_data_prep.ipynb (which runs rq1_step1_sub1_rasterise.bat, rq1_step1_sub2_upsample.bat and rq1_step1_sub3_clip.bat), rq1_step2_fao_forest.ipynb, rq1_step3_comp.ipynb and rq1_step4_visualisations.rmd
+For **RQ1** the relevant files (in order of use) are: [rq1_step1_data_prep.ipynb] (which runs rq1_step1_sub1_rasterise.bat, rq1_step1_sub2_upsample.bat and rq1_step1_sub3_clip.bat), rq1_step2_fao_forest.ipynb, rq1_step3_comp.ipynb and rq1_step4_visualisations.rmd
 
 For **RQ2** the relevant files (in order of use) are: rq2_step1_data_collection.ipynb (with relevant information in scrapy_setup_info.md and scraping tools in the wikiloc_scrapy folder) and rq2_step2_text_analysis.ipynb
 
