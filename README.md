@@ -15,14 +15,17 @@ To answer these research questions I use a combination of geospatial analysis (R
 I performed the analysis for all three research questions in a Python (3.12.7) conda environment ([environment.yml](environment.yml)). The steps for each research question alongside commented code in Juypter Notebooks. To create some of the final figures I also made use of R (Rmd available in this repository) and manual map creation in QGIS. 
 
 For **RQ1** the relevant files (in order of use) are: 
-1. [rq1_step1_data_prep.ipynb](rq1_step1_data_prep.ipynb) (which runs rq1_step1_sub1_rasterise.bat, rq1_step1_sub2_upsample.bat and rq1_step1_sub3_clip.bat)
-2. rq1_step2_fao_forest.ipynb
-3. rq1_step3_comp.ipynb
-4. rq1_step4_visualisations.rmd
+1. [rq1_step1_data_prep.ipynb](rq1_step1_data_prep.ipynb) which also runs:
+    - [rq1_step1_sub1_rasterise.bat](rq1_step1_sub1_rasterise.bat)
+    - [rq1_step1_sub2_upsample.bat](rq1_step1_sub2_upsample.bat)
+    - [rq1_step1_sub3_clip.bat](rq1_step1_sub3_clip.bat)
+2. [rq1_step2_fao_forest.ipynb](rq1_step2_fao_forest.ipynb)
+3. [rq1_step3_comp.ipynb](rq1_step3_comp.ipynb)
+4. [rq1_step4_visualisations.rmd](rq1_step4_visualisations.rmd)
 
 For **RQ2** the relevant files (in order of use) are: 
-1. rq2_step1_data_collection.ipynb (with relevant information in scrapy_setup_info.md and scraping tools in the wikiloc_scrapy folder)
-2. rq2_step2_text_analysis.ipynb
+1. [rq2_step1_data_collection.ipynb](rq2_step1_data_collection.ipynb) with additional information in [scrapy_setup_info.md](scrapy_setup_info.md) and scraping tools in [wikiloc_scrapy](wikiloc_scrapy/)
+2. [rq2_step2_text_analysis.ipynb](rq2_step2_text_analysis.ipynb)
 
 For **RQ3** the processing script is contained in rq3_all_steps.ipynb, however this script relies on the outputs from RQ1 and RQ2. 
 
