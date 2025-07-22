@@ -8,7 +8,7 @@ This repository contains all the scripts for my MSc thesis at the University of 
 
 To answer these research questions I use a combination of geospatial analysis (RQ1) and natural language processing (RQ2/RQ3). I have documented the steps for each RQ alongside the code in the Juypter Notebook and R Markdown files. 
 
-**A preview of some of the outputs:**
+**Output Preview**
 
 *For RQ1: Forest consensus map (a) with examples of Natura 2000 sites with no consensus on forest presence (b) and full consensus on forest presence (c).*
 
@@ -23,6 +23,42 @@ To answer these research questions I use a combination of geospatial analysis (R
 <img src="other/figure_selection/rq3_token_counts_per_cluster_class.png" alt="word frequency comparison" width="560" height="630" />
 
 
+**Data Acknowledgements** 
+
+Due to size limitations, this repository does not contain all the original data used in the processing steps. 
+
+For **RQ1**, I relied on the following datasets (the details and download information for which are provided in rq1_step1_data_prep.ipynb under Step 1):
+
+- Hansen Global Forest Change (Hansen et al, 2013)
+- ESA CCI Land Cover (Copernicus Climate Change Service, Climate Data Store, 2019)
+- JAXA ALOS-2 PALSAR-2 Forest/Non-Forest (Shimada et al, 2014)
+- CORINE Land Cover (Copernicus Land Monitoring Service, 2020)
+- LBM-DE / CORINE Land Cover 5 ha (Bundesamt für Kartographie und Geodäsie, 2021)
+- Natura 2000 Protected Sites (European Environment Agency, 2024)
+
+I also replicated the general methodologies from Sexton et al (2016) and Johnson et al (2023) as part of RQ1.
+
+For **RQ2**, I built upon the public repository [Wiki4CES](https://github.com/achaiallah-hub/Wiki4CES) by A. Chai-allah from the publication Chai-allah et al (2023). This repository scrapes URLs and trail content from the outdoor trail platform [Wikiloc](https://www.wikiloc.com). My modifcations to the scraping tools from Wiki4CES are described in rq2_step1_data_collection.ipynb and scrapy_setup_info.md and are indicated with comments in the scraping spiders provided in the wikiloc_scrapy folder. Additionally, for this research question I replicated some of the methods from Chai-allah et al (2023).
+
+As **RQ3** uses a combination of the outputs from RQ1 and RQ2, no additional data was required.
 
 
+**Citations**
 
+Bundesamt für Kartographie und Geodäsie. (2021). *CORINE Land Cover 5 ha, Stand 2018 (CLC5-2018)*. https://sgx.geodatenzentrum.de/web_public/gdz/dokumentation/deu/clc5_2018.pdf
+
+Copernicus Climate Change Service, Climate Data Store. (2019). Land cover classification gridded maps from 1992 to present derived from satellite observation. *Copernicus Climate Change Service (C3S) Climate Data Store (CDS).* https://doi.org/10.24381/cds.006f2c9a
+
+Copernicus Land Monitoring Service. (2020). *CORINE Land Cover 2018 (vector/raster 100 m), Europe, 6-yearly.* https://doi.org/10.2909/960998c1-1870-4e82-8051-6485205ebbac
+
+Chai-allah, A., Fox, N., Günther, F., Bentayeb, F., Brunschwig, G., Bimonte, S., & Joly, F. (2023). Mining crowdsourced text to capture hikers’ perceptions associated with landscape features and outdoor physical activities. *Ecological Informatics, 78,* 102332. https://doi.org/10.1016/j.ecoinf.2023.102332
+
+European Environment Agency. (2024). Natura 2000 (vector)—Version 2022. *EEA Datahub.* https://www.eea.europa.eu/en/datahub/datahubitem-view/6fc8ad2d-195d-40f4-bdec-576e7d1268e4?activeAccordion=1091667
+
+Hansen, M. C., Potapov, P. V., Moore, R., Hancher, M., Turubanova, S. A., Tyukavina, A., Thau, D., Stehman, S. V., Goetz, S. J., Loveland, T. R., Kommareddy, A., Egorov, A., Chini, L., Justice, C. O., & Townshend, J. R. G. (2013). High-Resolution Global Maps of 21st-Century Forest Cover Change. *Science, 342*(6160), 850–853. https://doi.org/10.1126/science.1244693
+
+Johnson, B. A., Umemiya, C., Magcale-Macandog, D. B., Estoque, R. C., Hayashi, M., & Tadono, T. (2023). Better monitoring of forests according to FAO’s definitions through map integration: Significance and limitations in the context of global environmental goals. *International Journal of Applied Earth Observation and Geoinformation, 122,* 103452. https://doi.org/10.1016/j.jag.2023.103452
+
+Sexton, J. O., Noojipady, P., Song, X.-P., Feng, M., Song, D.-X., Kim, D.-H., Anand, A., Huang, C., Channan, S., Pimm, S. L., & Townshend, J. R. (2016). Conservation policy and the measurement of forests. *Nature Climate Change, 6*(2), 192–196. https://doi.org/10.1038/nclimate2816
+
+Shimada, M., Itoh, T., Motooka, T., Watanabe, M., Shiraishi, T., Thapa, R., & Lucas, R. (2014). New global forest/non-forest maps from ALOS PALSAR data (2007–2010). *Remote Sensing of Environment, 155,* 13–31. https://doi.org/10.1016/j.rse.2014.04.014
