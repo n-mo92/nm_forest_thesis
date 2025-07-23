@@ -22,7 +22,7 @@ In this R Markdown script, I create some of the visualisations which I plan to i
 In this Rmd I create the following visualisations:
 1. Bar chart for total forest in the Germany Natura 2000 sites per Forest/Non-forest (FNF) map.
 2. Bar chart for total area in the Germany Natura 2000 sites according to the forest consensus class.
-3. A multi-plot figure with 6 tree maps (1 overall, 5 for each class from 1-5) for showing which FNF maps tend to agree with each other and which do not.
+3. A multi-plot figure with 6 treemaps (1 overall, 5 for each class from 1-5) for showing which FNF maps tend to agree with each other and which do not.
 
 
 ```{r install}
@@ -104,7 +104,7 @@ ggplot(data=fnf_all, aes(x=factor(fnf_map, fnf_order), y=total_forest_ha/1000000
            fill="#0F5726",
            width=0.4
            )+
-  labs(x="\nForest Definition Operationalisation", 
+  labs(x="\nForest Product", 
        y="Total Forest in German Natura 2000 Areas \n(millions ha)\n"
        ) +
   coord_cartesian(ylim=c(3.0, 4.5)) +
@@ -139,7 +139,7 @@ Some times the proportions may look off in the rmd version of the figure - it wi
 
 # Once happy with the outputs, save them! 
 # Note this will output whatever plot was run last!
-ggsave("outputs/figures/fnf_all_bar_chart.png",
+ggsave("outputs/figures/rq1_fnf_all_bar_chart.png",
        width=9,
        height=5
        )
@@ -250,7 +250,7 @@ ggplot(data=consensus_all, aes(x = interaction(consensus, class),
 
 # Once happy with the outputs, save them!
 # Note this will output whatever plot was run last!
-ggsave("outputs/figures/consensus_bar_chart.png",
+ggsave("outputs/figures/rq1_consensus_bar_chart.png",
        width=7,
        height=4
        )
@@ -258,16 +258,16 @@ ggsave("outputs/figures/consensus_bar_chart.png",
 ```
 
 
-## Tree map visualisations
+## Treemap visualisations
 
 In the next section I compare which forest definitions (FNF maps) agree with each other for the different consensus classes.
 
-Resources for tree maps and multi-plot figures:
+Resources for treemaps and multi-plot figures:
 https://www.data-to-viz.com/graph/treemap.html
 https://r-graph-gallery.com/treemap.html
 https://wilkelab.org/cowplot/articles/plot_grid.html
 
-First I create the main tree map which simply shows a breakdown of the classes overall (i.e. the size of the boxes in the tree map are according to the amount of area in that class). In the subsequent steps I create tree maps for class 1-5 (I skip class 0 and 6 as in these classes all the forest maps agree on either non-forest or forest, respectively). The final step is to combine all tree maps into a single, multi-plot figure.
+First I create the main treemap which simply shows a breakdown of the classes overall (i.e. the size of the boxes in the treemap are according to the amount of area in that class). In the subsequent steps I create treemaps for class 1-5 (I skip class 0 and 6 as in these classes all the forest maps agree on either non-forest or forest, respectively). The final step is to combine all treemaps into a single, multi-plot figure.
 
 
 ```{r con_treemap}
@@ -378,7 +378,7 @@ class5_pal_new = c("#78c679", "#9dd689", "#c2e699", "#e1f3b3", "#f1ffe3")
 ```
 
 
-Now I generate the tree map figure for class 1 (i.e. which FNF maps agree on non-forest)
+Now I generate the treemap figure for class 1 (i.e. which FNF maps agree on non-forest)
 
 
 ```{r con_treemap_class1}
@@ -491,7 +491,7 @@ class1_tree_plt
 
 The ESA map is most likely to estimate forest presence in areas where the other maps estimate non-forest.
 
-Now I generate the tree map figure for class 2 (i.e. which FNF maps agree on non-forest)
+Now I generate the treemap figure for class 2 (i.e. which FNF maps agree on non-forest)
 
 
 ```{r con_treemap_class2}
@@ -617,7 +617,7 @@ class2_tree_plt
 ```
 
 
-Now I generate the tree map figure for class 3 (i.e. which FNF maps agree on forest - in this class there's an even split)
+Now I generate the treemap figure for class 3 (i.e. which FNF maps agree on forest - in this class there's an even split)
 
 
 ```{r con_treemap_class3}
@@ -757,7 +757,7 @@ class3_tree_plt
 ```
 
 
-Now I generate the tree map figure for class 4 (i.e. which FNF maps agree on forest)
+Now I generate the treemap figure for class 4 (i.e. which FNF maps agree on forest)
 
 
 ```{r con_treemap_class4}
@@ -887,7 +887,7 @@ class4_tree_plt
 ```
 
 
-Now I generate the tree map figure for class 5 (i.e. which FNF maps agree on forest)
+Now I generate the treemap figure for class 5 (i.e. which FNF maps agree on forest)
 
 
 ```{r con_treemap_class5}
@@ -998,10 +998,10 @@ class5_tree_plt
 ```
 
 
-Finally, I generate a figure with all the tree maps together. **NOTE:** This will look messy in the Rmd outputs - check the save output figure in the next step to see what it really looks like.  
+Finally, I generate a figure with all the treemaps together. **NOTE:** This will look messy in the Rmd outputs - check the saved output figure in the next step to see what it really looks like.  
 
 
-```{r all_tree_maps}
+```{r all_treemaps}
 
 # Use cowplot to assemble tree maps into one figure
 plot_grid(main_tree_plt, class1_tree_plt, 
@@ -1014,11 +1014,11 @@ plot_grid(main_tree_plt, class1_tree_plt,
 ```
 
 
-```{r all_tree_maps_save}
+```{r all_treemaps_save}
 
 # Once happy with the outputs, save them!
 # Note this will output whatever plot was run last!
-ggsave("outputs/figures/tree_maps.png",
+ggsave("outputs/figures/rq1_treemaps.png",
        width=23,
        height=12
        )
