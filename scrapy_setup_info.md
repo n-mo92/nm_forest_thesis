@@ -83,9 +83,9 @@ In the [settings.py](wikiloc_scrapy/wikiloc_scrapy/settings.py) folder the follo
 DOWNLOAD_DELAY = 2 # ~minimum delay (approximately minimum because of randomisation)
 RANDOMIZE_DOWNLOAD_DELAY = True # for 2 second delay this means delay will be between 1-3 sec
 AUTOTHROTTLE_ENABLED = True 
-AUTOTHROTTLE_START_DELAY = 5 #initial download delay (seconds)
+AUTOTHROTTLE_START_DELAY = 2.5 #initial download delay (seconds)
 AUTOTHROTTLE_MAX_DELAY = 60 #maximum download delay (seconds)
-AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0 # The lower the number the politer your scraper
+AUTOTHROTTLE_TARGET_CONCURRENCY = 1.5 # The lower the number the politer your scraper
 
 See the link above for details about how the auto-throttle works.
 
