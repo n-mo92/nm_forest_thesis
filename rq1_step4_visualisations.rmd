@@ -105,7 +105,7 @@ ggplot(data=fnf_all, aes(x=factor(fnf_map, fnf_order), y=total_forest_ha/1000000
            width=0.4
            )+
   labs(x="\nForest Product", 
-       y="Total Forest in German Natura 2000 Areas \n(millions ha)\n"
+       y="Total Forest Area \n(millions ha)\n"
        ) +
   coord_cartesian(ylim=c(3.0, 4.5)) +
   scale_y_continuous(labels = label_number(accuracy = 0.01),
@@ -115,19 +115,19 @@ ggplot(data=fnf_all, aes(x=factor(fnf_map, fnf_order), y=total_forest_ha/1000000
              colour = "#676767", 
              linetype = 'dashed'
              ) +
-  annotate("text", x=1, y=3.98, 
+  annotate("text", x=1, y=3.99, 
            label="Mean Forest Area", 
            colour="#676767",
            size = 4,
            hjust = 0,
-           family = "serif"
+           #family = "serif"
            ) +
   theme(panel.grid.major.x = element_blank(),
         panel.background = element_blank(),
         axis.line = element_line(colour = "black"),
         axis.text = element_text(size=12),
         axis.title = element_text(size=13),
-        text = element_text(family="serif")
+        #text = element_text(family="sans-serif")
         )
 
 ```
@@ -203,25 +203,22 @@ ggplot(data=consensus_all, aes(x = interaction(consensus, class),
   scale_y_continuous(labels = label_number(accuracy = 0.1),
                      breaks = c(0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5),
                      ) +
-  labs(y="Total Area within Germany Natura 2000 Areas \n(millions ha)\n") +
+  labs(y="Total Area \n(millions ha)\n") +
   annotate(geom = "text", 
            x = seq_len(nrow(consensus_all)), 
            y = -0.1, 
            label = consensus_all$consensus, 
-           size = 4,
-           family = "serif") +
+           size = 4) +
   annotate(geom = "text", 
            x = c(2, 4, 6), 
            y = 3.25, 
            label = unique(consensus_all$forest_nonforest), 
-           size = 4,
-           family = "serif") +
+           size = 4) +
     annotate(geom = "text", 
            x = 4, 
            y = -0.3, 
            label = "\nDegree of Consensus", 
-           size = 4.5,
-           family = "serif") +
+           size = 4.5) +
   geom_vline(xintercept = 3.5, 
              colour = "#676767", 
              linetype = 'dashed'
@@ -236,7 +233,7 @@ ggplot(data=consensus_all, aes(x = interaction(consensus, class),
         axis.line = element_line(colour = "black"),
         axis.title.x = element_blank(),
         axis.text.x = element_blank(),
-        text = element_text(family="serif"),
+        #text = element_text(family="serif"),
         legend.position = "none",
         axis.text = element_text(size=12),
         axis.title = element_text(size=13)
