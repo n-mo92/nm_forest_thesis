@@ -107,7 +107,7 @@ ggplot(data=fnf_all, aes(x=factor(fnf_map, fnf_order), y=total_forest_ha/1000000
   labs(x="\nForest Product", 
        y="Total Forest Area \n(millions ha)\n"
        ) +
-  coord_cartesian(ylim=c(3.0, 4.5)) +
+  coord_cartesian(ylim=c(3.0, 4.25)) +
   scale_y_continuous(labels = label_number(accuracy = 0.01),
                      breaks = c(3.0, 3.25, 3.5, 3.75, 4.0, 4.25, 4.5),
                      ) +
@@ -127,8 +127,11 @@ ggplot(data=fnf_all, aes(x=factor(fnf_map, fnf_order), y=total_forest_ha/1000000
         axis.line = element_line(colour = "black"),
         axis.text = element_text(size=12),
         axis.title = element_text(size=13),
+        axis.title.x = element_text(vjust=4),
+        axis.title.y = element_text(vjust=-3),
         #text = element_text(family="sans-serif")
-        )
+        ) 
+
 
 ```
 **NOTE**
@@ -140,7 +143,7 @@ Some times the proportions may look off in the rmd version of the figure - it wi
 # Once happy with the outputs, save them! 
 # Note this will output whatever plot was run last!
 ggsave("outputs/figures/rq1_fnf_all_bar_chart.png",
-       width=9,
+       width=8,
        height=5
        )
 
