@@ -127,42 +127,36 @@ ggplot(data=fnf_all, aes(x=factor(fnf_map, fnf_order), y=total_forest_ha/1000000
            colour="#676767",
            size = 3,
            hjust = 0,
-           #family = "serif"
            ) +
       annotate("text", x=1.83, y=3.9, 
            label="-2.02%", 
            colour="#676767",
            size = 3,
            hjust = 0,
-           #family = "serif"
            ) +
         annotate("text", x=2.84, y=3.889, 
            label="-2.34%", 
            colour="#676767",
            size = 3,
            hjust = 0,
-           #family = "serif"
            ) +
           annotate("text", x=3.81, y=4.14, 
            label="+4.08%", 
            colour="#676767",
            size = 3,
            hjust = 0,
-           #family = "serif"
            ) +
             annotate("text", x=4.81, y=4.17, 
            label="+4.75%", 
            colour="#676767",
            size = 3,
            hjust = 0,
-           #family = "serif"
            ) +
               annotate("text", x=5.82, y=4.215, 
            label="+5.79%", 
            colour="#676767",
            size = 3,
            hjust = 0,
-           #family = "serif"
            ) +
   theme(panel.grid.major.x = element_blank(),
         panel.background = element_blank(),
@@ -272,6 +266,48 @@ ggplot(data=consensus_all, aes(x = interaction(consensus, class),
              colour = "#676767", 
              linetype = 'dashed'
              ) +
+      annotate("text", x=0.762, y=1.25, 
+           label="33.82%", 
+           colour="black",
+           size = 3,
+           hjust = 0
+           ) +
+        annotate("text", x=1.818, y=0.2, 
+           label="5.30%", 
+           colour="black",
+           size = 3,
+           hjust = 0
+           ) +
+          annotate("text", x=2.818, y=0.1, 
+           label="2.74%", 
+           colour="black",
+           size = 3,
+           hjust = 0
+           ) +
+          annotate("text", x=3.813, y=0.18, 
+           label="4.65%", 
+           colour="black",
+           size = 3,
+           hjust = 0
+           ) +
+          annotate("text", x=4.818, y=0.17, 
+           label="4.35%", 
+           colour="black",
+           size = 3,
+           hjust = 0
+           ) +
+          annotate("text", x=5.819, y=0.375, 
+           label="9.97%", 
+           colour="black",
+           size = 3,
+           hjust = 0
+           ) +
+          annotate("text", x=6.762, y=1.465, 
+           label="39.17%", 
+           colour="white",
+           size = 3,
+           hjust = 0
+           ) +
   theme(plot.margin = unit(c(1, 1, 3, 1), "lines"),
         panel.grid.major.x = element_blank(),
         panel.background = element_blank(),
