@@ -48,7 +48,7 @@ As **RQ3** uses a combination of the outputs from RQ1 and RQ2, no additional dat
 
 ### Using the code
 
-I performed the analysis for all three research questions in a Python (3.12.7) conda environment ([environment.yml](environment.yml)). The steps for each research question alongside commented code in Juypter Notebooks. To create some of the final figures I also made use of R (Rmd available in this repository) and manual map creation in QGIS. 
+I performed the analysis for all three research questions in a Python (3.12.7) conda environment ([environment.yml](environment.yml)). The steps for each research question are available alongside commented code in Juypter Notebooks. To create some of the final figures I also made use of R (Rmd available in this repository) and used QGIS for some manual map creation. 
 
 For **RQ1** the relevant files (in order of use) are: 
 1. [rq1_step1_data_prep.ipynb](rq1_step1_data_prep.ipynb) which also runs:
