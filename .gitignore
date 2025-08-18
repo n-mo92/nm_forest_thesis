@@ -6,6 +6,3 @@ outputs/
 thesis_env_conda/
 wikiloc_scrapy/wikiloc_scrapy/spiders/crawling_outputs/
 word2vec/
-
-# also ignore these specificfiles
-rq1_step3_5_overlap_testing.ipynb
