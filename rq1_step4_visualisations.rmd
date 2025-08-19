@@ -200,8 +200,8 @@ consensus_all <- read_csv("outputs/all_consensus_natura_stats.csv",
 consensus_all <- consensus_all[2:8,2:4]
 
 # Add new class information (just want to visualise it differently)
-consensus_all$forest_nonforest = c("Non-Forest", "Non-Forest", "Non-Forest",
-                                   "Uncertain", "Forest", "Forest", "Forest")
+consensus_all$forest_nonforest = c("Non-forest", "Non-forest", "Non-forest",
+                                   " ", "Forest", "Forest", "Forest")
 consensus_all$consensus = c("Full", "High", "Low", "None", 
                             "Low", "High", "Full")
 
@@ -228,11 +228,11 @@ ggplot(data=consensus_all, aes(x = interaction(consensus, class),
            width=0.5) +
   scale_fill_manual(values=c("#FFFFFF", "#DCDCDC", "#B4B6BB", "#F1AB4A",
                              "#EFF171", "#ABE071", "#0F5726")) +
-  coord_cartesian(xlim = c(0.5, 7.5), ylim = c(0, 3.5),  expand=FALSE, clip="off") +
+  coord_cartesian(xlim = c(0.5, 7.5), ylim = c(0, 2.75),  expand=FALSE, clip="off") +
   scale_y_continuous(labels = label_number(accuracy = 0.1),
-                     breaks = c(0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5),
+                     breaks = c(0, 0.5, 1.0, 1.5, 2.0, 2.5),
                      ) +
-  labs(y="Total Area \n(millions ha)\n") +
+  labs(y="Total area \n(millions ha)\n") +
   annotate(geom = "text", 
            x = seq_len(nrow(consensus_all)), 
            y = -0.1, 
@@ -240,13 +240,13 @@ ggplot(data=consensus_all, aes(x = interaction(consensus, class),
            size = 4) +
   annotate(geom = "text", 
            x = c(2, 4, 6), 
-           y = 3.25, 
+           y = 2.5, 
            label = unique(consensus_all$forest_nonforest), 
            size = 4) +
     annotate(geom = "text", 
            x = 4, 
            y = -0.3, 
-           label = "\nDegree of Consensus", 
+           label = "\nDegree of consensus", 
            size = 4.5) +
   geom_vline(xintercept = 3.5, 
              colour = "#676767", 
@@ -256,44 +256,44 @@ ggplot(data=consensus_all, aes(x = interaction(consensus, class),
              colour = "#676767", 
              linetype = 'dashed'
              ) +
-      annotate("text", x=0.762, y=1.25, 
-           label="33.82%", 
+      annotate("text", x=0.757, y=1.085, 
+           label="37.97%", 
            colour="black",
            size = 3,
            hjust = 0
            ) +
-        annotate("text", x=1.818, y=0.2, 
-           label="5.30%", 
+        annotate("text", x=1.818, y=0.175, 
+           label="5.91%", 
            colour="black",
            size = 3,
            hjust = 0
            ) +
-          annotate("text", x=2.818, y=0.1, 
-           label="2.74%", 
+          annotate("text", x=2.818, y=0.085, 
+           label="2.98%", 
            colour="black",
            size = 3,
            hjust = 0
            ) +
-          annotate("text", x=3.813, y=0.18, 
-           label="4.65%", 
+          annotate("text", x=3.813, y=0.071, 
+           label="2.53%", 
            colour="black",
            size = 3,
            hjust = 0
            ) +
-          annotate("text", x=4.818, y=0.17, 
-           label="4.35%", 
+          annotate("text", x=4.818, y=0.089, 
+           label="3.37%", 
            colour="black",
            size = 3,
            hjust = 0
            ) +
-          annotate("text", x=5.819, y=0.375, 
-           label="9.97%", 
+          annotate("text", x=5.819, y=0.25, 
+           label="9.07%", 
            colour="black",
            size = 3,
            hjust = 0
            ) +
-          annotate("text", x=6.762, y=1.465, 
-           label="39.17%", 
+          annotate("text", x=6.762, y=1.1, 
+           label="38.18%", 
            colour="white",
            size = 3,
            hjust = 0
@@ -312,6 +312,9 @@ ggplot(data=consensus_all, aes(x = interaction(consensus, class),
 
 ```
 
+
+**NOTE**
+Some times the proportions may look off in the rmd version of the figure - it will look a bit different in the saved png.
 
 
 ```{r con_bar_save}
