@@ -74,15 +74,6 @@ fnf_all$diff_mean_per <- as.numeric(fnf_all$diff_mean_per)
 # Calculate the mean amount of forest (ha) across all FNF maps
 fnf_mean_ha <- mean(as.numeric(fnf_all$total_forest_ha))
 
-# Change names of FNF maps to be more space efficient
-fnf_all <- fnf_all %>% 
-  mutate(fnf_map = str_replace(fnf_map, "Hansen Tree Cover", "H/I")) %>%
-  mutate(fnf_map = str_replace(fnf_map, "ESA Land Cover", "ESA")) %>%
-  mutate(fnf_map = str_replace(fnf_map, "JAXA Forest/Non-Forest", "JAX")) %>%
-  mutate(fnf_map = str_replace(fnf_map, "CORINE Land Use", "COR")) %>%
-  mutate(fnf_map = str_replace(fnf_map, "Germany Land Use", "DE")) %>%
-  mutate(fnf_map = str_replace(fnf_map, "FAO-Forest Approximation", "FAO")) 
-
 ```
 
 
@@ -104,56 +95,55 @@ ggplot(data=fnf_all, aes(x=factor(fnf_map, fnf_order), y=total_forest_ha/1000000
            fill="#0F5726",
            width=0.4
            )+
-  labs(x="\nForest Product", 
-       y="Total Forest Area \n(millions ha)\n"
+  labs(x="\nForest product", 
+       y="Total forest area \n(millions ha)\n"
        ) +
-  coord_cartesian(ylim=c(3.0, 4.25)) +
+  coord_cartesian(ylim=c(2.0, 3.1)) +
   scale_y_continuous(labels = label_number(accuracy = 0.01),
-                     breaks = c(3.0, 3.25, 3.5, 3.75, 4.0, 4.25, 4.5),
+                     breaks = c(2.0, 2.25, 2.5, 2.75, 3.0),
                      ) +
   geom_hline(yintercept = fnf_mean_ha/1000000, 
              colour = "#676767", 
              linetype = 'dashed'
              ) +
-  annotate("text", x=1, y=3.99, 
-           label="Mean Forest Area", 
+  annotate("text", x=0.5, y=2.856, 
+           label="Mean forest area", 
            colour="#676767",
-           size = 4,
-           hjust = 0,
-           #family = "serif"
-           ) +
-    annotate("text", x=0.79, y=3.56, 
-           label="-11.29%*", 
-           colour="#676767",
-           size = 3,
+           size = 3.5,
            hjust = 0,
            ) +
-      annotate("text", x=1.83, y=3.9, 
-           label="-2.02%", 
+  annotate("text", x=0.835, y=2.655, 
+           label="-7.14%*", 
            colour="#676767",
            size = 3,
            hjust = 0,
            ) +
-        annotate("text", x=2.84, y=3.889, 
-           label="-2.34%", 
+  annotate("text", x=1.819, y=2.895, 
+           label="+1.60%", 
            colour="#676767",
            size = 3,
            hjust = 0,
            ) +
-          annotate("text", x=3.81, y=4.14, 
-           label="+4.08%", 
+  annotate("text", x=2.821, y=2.906, 
+           label="+1.98%", 
            colour="#676767",
            size = 3,
            hjust = 0,
            ) +
-            annotate("text", x=4.81, y=4.17, 
-           label="+4.75%", 
+  annotate("text", x=3.837, y=2.788, 
+           label="-0.42%", 
+           colour="white",
+           size = 3,
+           hjust = 0,
+           ) +
+  annotate("text", x=4.832, y=2.863, 
+           label="+0.45%", 
            colour="#676767",
            size = 3,
            hjust = 0,
            ) +
-              annotate("text", x=5.82, y=4.215, 
-           label="+5.79%", 
+  annotate("text", x=5.825, y=2.942, 
+           label="+3.20%", 
            colour="#676767",
            size = 3,
            hjust = 0,
