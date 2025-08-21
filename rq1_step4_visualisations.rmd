@@ -376,7 +376,7 @@ main_tree_plt <- ggplot(main_tree_data) +
             linewidth = 1,
             colour = "#1E1D23",
             fill = c("#0F5726", "#FFFFFF", "#ABE071",
-                     "#DCDCDC", "#F1AB4A",  "#EFF171","#B4B6BB"),
+                     "#DCDCDC", "#EFF171", "#B4B6BB","#F1AB4A"),
             alpha = 0.9) +
   geom_fit_text(data = main_tree_data,
                 aes(xmin = x0, 
