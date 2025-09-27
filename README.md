@@ -4,8 +4,8 @@
 
 This repository contains all the scripts for my MSc thesis at the University of Zurich. The files are generally organised by my three research questions (RQs):
 
-1)	**What are the consequences of forest definition?** How do forest cover measurements change across different forest definitions and their geospatial operationalisations in Germany’s Natura 2000 sites? How much consensus is there on forest presence and absence?  
-2)	**How do people value forests?** What cultural ecosystem services are experienced by people recreating in forests in the Natura 2000 network in Germany? In particular, what can we learn about cultural ecosystem services using natural language processing techniques with data from the route sharing platform, Wikiloc?
+1)	**How do forest definitions influence forest cover?** How do forest cover measurements change across different forest definitions and their geospatial operationalisations in Germany’s Natura 2000 sites? How much consensus is there on forest presence and absence?  
+2)	**How do people value forests in terms of cultural ecosystem services?** What cultural ecosystem services are experienced by people recreating in forests in the Natura 2000 network in Germany? In particular, what can we learn about cultural ecosystem services using natural language processing techniques with data from the route sharing platform, Wikiloc?
 3)	**How does the way people value forest relate to forest definition?** Do the observed cultural ecosystem services change in areas where there is consensus on forest presence compared to areas where there is no consensus?
 
 To answer these research questions I use a combination of geospatial analysis (RQ1) and natural language processing (RQ2/RQ3). 
