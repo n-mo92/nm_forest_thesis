@@ -13,7 +13,7 @@ To answer these research questions I use a combination of geospatial analysis (R
 
 ### Output preview
 
-*For RQ1: Forest consensus map (a) with examples of Natura 2000 sites with no consensus on forest presence (b) and full consensus on forest presence (c). Note the map itself is output by code in this repository, but I created this particular figure in QGIS*
+*For RQ1: Forest consensus map (a) with examples of Natura 2000 sites with no consensus on forest presence (b) and full consensus on forest presence (c). Note the map itself is output by code in this repository, but I created this particular figure in QGIS.*
 
 <img src="other/figure_selection/rq1_main_consenus_summary_map.png" alt="forest consensus map" width="525" height="375" />
 
