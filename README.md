@@ -68,7 +68,7 @@ For **RQ3** the processing script is contained in [rq3_all_steps.ipynb](rq3_all_
 
 ### Acknowledgements
 
-A sincere thank you to Prof. Dr. Ross Purves for his supervision on this project. Thank you also to Dr. Abdesslam Chai-allah for providing his [Wiki4CES](https://github.com/achaiallah-hub/Wiki4CES) repository, as well as additional information and encouragement. 
+A sincere thank you to Prof. Dr. Ross Purves for his supervision on this project. Thank you also to Dr. Abdesslam Chai-allah for providing his [Wiki4CES](https://github.com/achaiallah-hub/Wiki4CES) repository, as well as additional information and encouragement at the start of my project. 
 
 
 ### Contact Information
